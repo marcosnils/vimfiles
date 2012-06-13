@@ -20,11 +20,10 @@ source $VIMRUNTIME/mswin.vim
 behave mswin
 
 ""  Set cursor selection mode and prevent entering select mode (prefer visual mode).
-set selection=exclusive
-set selectmode=mouse,key,cmd
+"set selection=exclusive
+"set selectmode=mouse,key,cmd
 
 " set English language
-language messages en_US
 set langmenu=none
 
 " Use english for spellchecking, but don't spellcheck by default
@@ -33,8 +32,9 @@ if version >= 700
     set nospell
 endif
 
-"" enable mouse
-set mouse=a
+" enable mouse (if I want to use mouse)
+" set mouse=a
+
 
 " Better modes.  Remeber where we are, support yankring
 set viminfo=!,'100,\"100,:20,<50,s10,h,n~/.viminfo
@@ -134,10 +134,10 @@ filetype plugin indent on
 syntax on
 set background=dark
 "colorscheme ir_black
-"colorscheme desert
+colorscheme desert
 "colorscheme molokai
 "colorscheme Mustang
-colorscheme solarized
+"colorscheme solarized
 
 ""Minimal number of screen lines to keep above and below the cursor.
 set scrolloff=3
