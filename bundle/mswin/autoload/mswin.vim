@@ -64,8 +64,8 @@ if !has("unix")
 endif
 
 " CTRL-Z is Undo; not in cmdline though
-noremap <C-Z> u
-inoremap <C-Z> <C-O>u
+"noremap <C-Z> u
+"inoremap <C-Z> <C-O>u
 
 " CTRL-Y is Redo (although not repeat); not in cmdline though
 noremap <C-Y> <C-R>

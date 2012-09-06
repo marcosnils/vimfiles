@@ -16,8 +16,8 @@ set nobackup
 set noswapfile
 
 "" Loads standard MS-Windows way of CTRL-X, CTRL-C and CTRL-V
-source $VIMRUNTIME/mswin.vim
-behave mswin
+"source $VIMRUNTIME/mswin.vim
+"behave mswin
 
 ""  Set cursor selection mode and prevent entering select mode (prefer visual mode).
 "set selection=exclusive
@@ -143,9 +143,9 @@ colorscheme desert
 set scrolloff=3
 
 "" set tabstop value and shift width
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+"set tabstop=4
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 ""setting about indent
