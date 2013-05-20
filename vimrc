@@ -156,7 +156,6 @@ set smartindent
 set nojoinspaces
 
 "" Wrap text
-set wrap
 set showbreak=...
 set linebreak
 "set textwidth=79
