@@ -18,7 +18,7 @@ your old .vim folder and just git clone a new version.
 Clone this repo into your home directory either as `.vim` (linux/mac) or 
 `vimfiles` (Windows). Such as:
 
-    git clone git://github.com/carlosedp/vimfiles.git ~/.vim
+    git clone git://github.com/marcosnils/vimfiles.git ~/.vim
 
 Then `cd` into the repo and run this to get the snippets submodule:
 
