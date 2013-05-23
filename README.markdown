@@ -5,8 +5,8 @@ Vim
 It is recommended that you use gVim in either Windows or Linux and MacVim for
 Mac. Download from:
 
-* (Windows) [http://www.vim.org/download.php#pc](http://www.vim.org/download.php#pc) (gvim72.exe)
-* (Mac) [http://code.google.com/p/macvim/](http://code.google.com/p/macvim/) (snapshot-64 for Lion or build-53 for older versions)
+* (Windows) [http://www.vim.org/download.php#pc](http://www.vim.org/download.php#pc) (gvim73.exe)
+* (Mac) [http://code.google.com/p/macvim/](http://code.google.com/p/macvim/) (snapshot-64)
 
 Usage
 -----
@@ -20,7 +20,7 @@ Clone this repo into your home directory either as `.vim` (linux/mac) or
 
     git clone git://github.com/marcosnils/vimfiles.git ~/.vim
 
-Then `cd` into the repo and run this to get the snippets submodule:
+Then `cd` into the repo and run this to get the submodules:
 
     git submodule init
     git submodule update
@@ -50,6 +50,7 @@ To update all submodules, use the following command on vimfiles dir:
 
 
 If you are using MacVim on MacOS Lion, disable the native fullscreen mode to allow "WriteRoom" mode:
+
     defaults write org.vim.MacVim MMNativeFullScreen
 
 Don't forget to install the font you plan to use from the `Fonts` dir. You can check the one that is enabled(uncommented) on the `set guifont` setting in the `vimrc` file.
@@ -71,6 +72,7 @@ On Windows you have to download Ctags and add ctags.exe in your PATH.
 
 Mac OS X and most Linux distros come with Ruby already. If you're in Windows
 look for Luis Lavena's latest Ruby Installer on [http://rubyforge.org/projects/rubyinstaller/](http://rubyforge.org/projects/rubyinstaller/)
+
 * Ack
 
 You can download Ack standalone from http://betterthangrep.com/ using their own instructions:
@@ -97,8 +99,7 @@ My personal mappings
 
     F11             -   No-distraction mode writeroom mode (fullscreen)
 
-    Ctrl+F4         -   Close current file
-    Ctrl+X          -   Close current file (In normal mode)
+    Ctrl+W/Ctrl-X   -   Close current file
     Shift+F4        -   Close current file without saving
     Ctrl+Q          -   Visual Mode (Replaces <C-V>)
 
@@ -110,8 +111,7 @@ My personal mappings
     <leader>WW      -   Strip spaces from the end of lines (entire file) on all buffers
     <leader>mm      -   Remove windows to unix "^M" artifacts
     <leader>m       -   Opens Most Recently Used file list
-    <leader>ci      -   Toggles block comment/uncomment
-    <leader>t       -   Opens Command-T fuzzy file finder
+    <leader>c<space>-   Toggles block comment/uncomment
     <leader>d       -   Duplicates current line
     <leader>r       -   Search and replace in entire file (:%s//)
     <leader>s       -   Split window vertically and switch to it
@@ -128,6 +128,8 @@ My personal mappings
     <leader>-       -   Removes all highlight
     <leader>+       -   Restores previous highlight
     <leader>space   -   Clear search highlight
+    <leader>g       -   Opens Gundo plugin
+    <leader>a       -   On SelectMode allows surrounding selection with following char
 
     Ctrl+n          -   Create new empty buffer
     Ctrl+C          -   Copy
@@ -137,6 +139,7 @@ My personal mappings
     Ctrl+Z          -   Undo
     Ctrl+Y          -   Redo
     Ctrl+A          -   Select all
+    Ctrl+P          -   Opens CommandP fuzzy file finder
     Ctrl+Tab        -   Cycle thru buffers
     Tab             -   Autocomplete / Add snippet
     Alt+w           -   Close window
@@ -146,9 +149,12 @@ My personal mappings
     Ctrl+up         -   Move current line up(Also works with selection)
     Ctrl+down       -   Move current line down(Also works with selection)
 
-    Ctrl+F2         -   Set line bookmark
-    Shift+F2        -   Go to previous line bookmark
-    Alt+F2          -   Go to next line bookmark
+    bb              -   Set line bookmark(Normal mode)
+    <leader>bb      -   Set line bookmark(Insert mode)
+    bp              -   Go to previous line bookmark
+    bn              -   Go to next line bookmark
+
+    za              -   Toggle folding
 
     >               -   Indent selected text or selection
     <               -   Dedent selected text or selection

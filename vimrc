@@ -132,12 +132,11 @@ set whichwrap+=<,>,[,],h,l
 "" set filetype check on
 filetype plugin indent on
 syntax on
+
+"" Set colorschemes
 set background=dark
-"colorscheme ir_black
-colorscheme desert
-"colorscheme molokai
-"colorscheme Mustang
 "colorscheme solarized
+colorscheme Tomorrow-Night
 
 ""Minimal number of screen lines to keep above and below the cursor.
 set scrolloff=3
@@ -194,14 +193,19 @@ set nofoldenable
 "" Set custom filetypes
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ejs set filetype=html.js
+autocmd! BufRead,BufNewFile *.fountain	 set filetype=fountain
 
 "" Define custom indentation for filetypes
 autocmd FileType javascript :setlocal sw=2 ts=2 sts=2
+autocmd FileType jade :setlocal sw=2 ts=2 sts=2
+autocmd FileType less :setlocal sw=2 ts=2 sts=2
 autocmd FileType coffee :setlocal sw=2 ts=2 sts=2
+autocmd FileType ruby,eruby :setlocal sw=2 ts=2 sts=2
 
 "" Disable AutoClose plugin on markdown files"
-autocmd FileType * :AutoCloseOn
-autocmd FileType markdown :AutoCloseOff
+"let g:AutoCloseProtectedRegions = []
+"autocmd FileType * :AutoCloseOn
+"autocmd FileType markdown :AutoCloseOff
 "autocmd FileType markdown :set spell
 
 " Remember cursor position
@@ -214,7 +218,7 @@ au VimResized * exe "normal! \<c-w>="
 augroup ft_statuslinecolor
     au!
     au InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
-    au InsertLeave * hi StatusLine ctermfg=130 guifg=gray
+    au InsertLeave * hi StatusLine ctermfg=59 guifg=#4d5057
 augroup END
 set laststatus=2
 set statusline=
@@ -224,6 +228,12 @@ set statusline+=%=
 set statusline+=\ [%{&encoding}\ %{&fileformat}\ %{strlen(&ft)?&ft:'none'}]
 set statusline+=\ %{WordCount()}\ words
 set statusline+=\ \ %(%c:%l/%L%)\ (%p%%)
+
+" Hightlight line if exceeds 80 columns
+let g:colorcol = 80
+if exists('+colorcolumn')
+  let &colorcolumn=g:colorcol
+endif
 
 """""""""""""""""""""""""""""""""""""""
 """""""""""""  Functions  """""""""""""
@@ -242,9 +252,9 @@ function! UpdateSession()
     if argc()==0
         let b:sessiondir = $HOME
         let b:sessionfile = b:sessiondir . "/.session.vim"
-        if !(filereadable(b:sessionfile))
-            :call MakeSession()
-        endif
+        "if !(filereadable(b:sessionfile))
+            ":call MakeSession()
+        "endif
         exe "mksession! " . b:sessionfile
         echo "updating session"
     endif
@@ -360,8 +370,15 @@ let g:fullscreenmode = 0
 function! ToggleFullScreen()
     if g:fullscreenmode == 0
         let g:fullscreenmode = 1
+        if exists('+colorcolumn')
+            set colorcolumn=
+        endif
+        let g:oldColumns = &columns
+        let g:oldLines = &lines
         set nonumber
         set laststatus=0
+        set rulerformat=%40(%{WordCount()}\ words%=%(%c:%l/%L%)\ (%p%%)%)
+        set linespace=3
         set guioptions-=mr
         set guioptions-=Tb
         if has("gui_running")
@@ -379,23 +396,39 @@ function! ToggleFullScreen()
         endif
         if has("gui_macvim")
             " Settings for WriteRoom like mode.
-            set lines=50 columns=80
-            set fuoptions=background:#00002b36
+            set lines=999 columns=80
+            set fuoptions=background:Normal
             hi NonText guifg=bg
             set fullscreen
+        else
+            set numberwidth=10
+            set foldcolumn=12
+            hi FoldColumn ctermbg=none
+            hi LineNr ctermfg=0 ctermbg=none
+            hi NonText ctermfg=0
         endif
         :CMiniBufExplorer
     else
         let g:fullscreenmode = 0
+        set linespace=0
         set guioptions+=mr
         set guioptions+=Tb
         set laststatus=2
         set number
         if has("gui_macvim")
             set nofullscreen
+        else
+            set numberwidth=4
+            set foldcolumn=0
+            execute 'colorscheme ' . g:colors_name
+        endif
+        let &columns=g:oldColumns
+        let &lines=g:oldLines
+        if exists('+colorcolumn')
+            let &colorcolumn=g:colorcol
         endif
         :MiniBufExplorer
-        execute "normal \<c-w>w"
+        "execute "normal \<c-w>w"
     endif
 endfunction
 
@@ -411,6 +444,15 @@ function! MyLastWindow()
     endif
 endfunction
 
+"" Clear trailing whitespaces on save for some filetypes
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd FileType c,cpp,java,php,ruby,eruby,python,javascript,coffee,jade,sass,less,scss autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 """""""""""""""""""""""""""""""""""""""
 """""""""" Plugin Parameters """"""""""
@@ -429,20 +471,9 @@ let NERDTreeChDirMode=1
 "" Show hidden files by default
 let NERDTreeShowHidden=1
 
-"" Set BufTabs parameters
-"let g:buftabs_only_basename=1
-"let g:buftabs_in_statusline=1
-"let g:buftabs_reserved_space=55
-"let g:buftabs_active_highlight_group="Visual"
-
 "Command-T configuration
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
-
-"" MRU Configuration
-let MRU_Exclude_Files = '.*\\Local Settings\\Temp\\.*|^.*\.(hg|git|bzr)\\.*$'
-let MRU_Max_Menu_Entries = 40
-let MRU_Max_Entries = 50
 
 "" Taglist configuration
 let Tlist_Use_Right_Window = 1
@@ -475,6 +506,8 @@ let g:miniBufExplMapWindowNavArrows = 0
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplCheckDupeBufs = 0
+let g:miniBufExplBuffersNeeded = 0
+let g:miniBufExplAutoStart = 1
 
 hi MBEVisibleActive guifg=#A6DB29 guibg=fg
 hi MBEVisibleChangedActive guifg=#F1266F guibg=fg
@@ -498,7 +531,8 @@ map <silent> bp :PreviousBookmark<CR>
 
 
 "" Ack configuration
-au BufNewFile,BufReadPost *.js let g:ackprg="ack --ignore-dir=node_modules"
+au BufNewFile,BufReadPost *.js let g:ackprg="ack --ignore-dir=node_modules -H --nocolor --nogroup --column"
+
 
 """"""""""""""""""""""""""""""""""""""
 """""""""""" Key Mappings """"""""""""
@@ -577,7 +611,7 @@ nnoremap <silent> <leader>RR :bufdo call IndentFile()<CR>:let _s=@/<Bar>:%s/\s\+
 noremap <Leader>mm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 "" Toggle Last used files list
-nnoremap <silent> <leader>m :MRU<CR>
+nnoremap <silent> <leader>m :CtrlPMRUFiles<CR>
 
 "" Edits vimrc file
 if has("gui_macvim")
@@ -588,6 +622,7 @@ endif
 
 "" Duplicates current line
 nnoremap <leader>d Yp
+snoremap <leader>d <C-O>Yp
 
 "" Creates new empty buffer
 nmap <C-N> :enew<CR>
@@ -612,8 +647,8 @@ map <silent> <F4> <esc>:bn<CR>
 imap <silent> <F4> <C-O>:bn<CR>
 
 "" Toggle between Wrap and no Wrap lines
-map <silent> <F5> :set nowrap!<CR>
-imap <silent> <F5> <C-O>:set nowrap!<CR>
+map <F5> :set nowrap!<CR> :set wrap?<CR>
+imap <F5> <C-O>:set nowrap!<CR>
 
 "" Toggle between display line endings
 map <silent> <F6> :set nolist!<CR>
@@ -658,7 +693,7 @@ map <silent> <leader>tl :TlistToggle<CR>
 nnoremap , /<C-R><C-W><CR>N
 
 "" Clear highlight
-nnoremap <leader><space> :noh<CR>:call clearmatches()<CR>
+nnoremap <silent> <leader><space> :noh<CR>:call clearmatches()<CR>
 
 "" Make cursor move as expected with wrapped lines (in insert mode only with Ctrl key)
 nnoremap <silent> <Up> gk
@@ -681,7 +716,7 @@ command! PR :!pandoc "%" -o "%:t:r.rtf" -t rtf -s
 map J gJ
 
 "" Replace
-nnoremap <leader>r :%s//<left>
+nnoremap <leader>r :%s/\v/<left>
 
 " Easy filetype switching
 nnoremap _md :set ft=markdown<CR>
