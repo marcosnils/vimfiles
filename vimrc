@@ -135,8 +135,8 @@ syntax on
 
 "" Set colorschemes
 set background=dark
-"colorscheme solarized
-colorscheme Tomorrow-Night
+colorscheme distinguished
+"colorscheme Tomorrow-Night
 
 ""Minimal number of screen lines to keep above and below the cursor.
 set scrolloff=3
@@ -228,12 +228,6 @@ set statusline+=%=
 set statusline+=\ [%{&encoding}\ %{&fileformat}\ %{strlen(&ft)?&ft:'none'}]
 set statusline+=\ %{WordCount()}\ words
 set statusline+=\ \ %(%c:%l/%L%)\ (%p%%)
-
-" Hightlight line if exceeds 80 columns
-let g:colorcol = 80
-if exists('+colorcolumn')
-  let &colorcolumn=g:colorcol
-endif
 
 """""""""""""""""""""""""""""""""""""""
 """""""""""""  Functions  """""""""""""
