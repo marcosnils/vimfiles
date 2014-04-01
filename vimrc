@@ -32,8 +32,8 @@ if version >= 700
     set nospell
 endif
 
-" enable mouse (if I want to use mouse)
-" set mouse=a
+"enable mouse (if I want to use mouse)
+"set mouse=a
 
 
 " Better modes.  Remeber where we are, support yankring
@@ -135,16 +135,16 @@ syntax on
 
 "" Set colorschemes
 set background=dark
-colorscheme distinguished
-"colorscheme Tomorrow-Night
+"colorscheme distinguished
+colorscheme Tomorrow-Night
 
 ""Minimal number of screen lines to keep above and below the cursor.
 set scrolloff=3
 
 "" set tabstop value and shift width
 "set tabstop=4
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 
 ""setting about indent
@@ -222,7 +222,7 @@ augroup ft_statuslinecolor
 augroup END
 set laststatus=2
 set statusline=
-set statusline+=%f\ %m\ %r
+set statusline+=%F\ %m\ %r
 set statusline+=%{fugitive#statusline()}
 set statusline+=%=
 set statusline+=\ [%{&encoding}\ %{&fileformat}\ %{strlen(&ft)?&ft:'none'}]
