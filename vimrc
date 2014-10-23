@@ -135,8 +135,7 @@ syntax on
 
 "" Set colorschemes
 set background=dark
-"colorscheme distinguished
-colorscheme Tomorrow-Night
+colorscheme distinguished
 
 ""Minimal number of screen lines to keep above and below the cursor.
 set scrolloff=3
