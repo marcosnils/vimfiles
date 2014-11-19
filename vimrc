@@ -517,11 +517,6 @@ else
 endif
 let g:jekyll_post_suffix = "md"
 
-"" Define VimBookmarking mappings
-map <silent> bb :ToggleBookmark<CR>
-map <silent> bn :NextBookmark<CR>
-map <silent> bp :PreviousBookmark<CR>
-
 
 "" Ack configuration
 au BufNewFile,BufReadPost *.js let g:ackprg="ack --ignore-dir=node_modules -H --nocolor --nogroup --column"
