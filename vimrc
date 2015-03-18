@@ -489,27 +489,6 @@ highlight Tb_Changed guifg=#CD5907 guibg=fg
 highlight Tb_VisibleNormal guifg=#5DC2D6 guibg=fg
 highlight Tb_VisibleChanged guifg=#F1266F guibg=fg
 
-"" MiniBufExplorer settings
-autocmd BufEnter -MiniBufExplorer- stopinsert
-let g:miniBufExplMaxSize = 3
-let g:miniBufExplMinSize = 1
-let g:miniBufExplorerMoreThanOne=0
-let g:miniBufExplUseSingleClick = 1
-let g:miniBufExplModSelTarget = 1
-let g:miniBufExplMapWindowNavArrows = 0
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplCheckDupeBufs = 0
-let g:miniBufExplBuffersNeeded = 0
-let g:miniBufExplAutoStart = 1
-
-hi MBEVisibleActive guifg=#A6DB29 guibg=fg
-hi MBEVisibleChangedActive guifg=#F1266F guibg=fg
-hi MBEVisibleChanged guifg=#F1266F guibg=fg
-hi MBEVisibleNormal guifg=#5DC2D6 guibg=fg
-hi MBEChanged guifg=#CD5907 guibg=fg
-hi MBENormal guifg=#808080 guibg=fg
-
 "" Jekyll settings
 if has("gui_macvim")
     let g:jekyll_path = '/Users/carlosedp/Projects/carlosedp.github.com'
@@ -628,8 +607,6 @@ imap <silent> <F1> <esc>:NERDTreeFind<CR>
 nmap <silent> <F1> :NERDTreeFind<CR>
 
 "" List/Next/Previous buffers
-map <silent> <F2> <esc>:BufExplorer<CR>
-imap <silent> <F2> <C-O>:BufExplorer<CR>
 map <silent> <F3> <esc>:bp<CR>
 imap <silent> <F3> <C-O>:bp<CR>
 map <silent> <F4> <esc>:bn<CR>
