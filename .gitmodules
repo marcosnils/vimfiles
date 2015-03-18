@@ -43,9 +43,6 @@
 [submodule "bundle/Arduino-syntax"]
 	path = bundle/Arduino-syntax
 	url = https://github.com/vim-scripts/Arduino-syntax-file.git
-[submodule "bundle/bufexplorer"]
-	path = bundle/bufexplorer
-	url = https://github.com/vim-scripts/bufexplorer.zip.git
   [submodule "bundle/tlib"]
 	path = bundle/tlib
 	url = https://github.com/tomtom/tlib_vim.git
@@ -94,9 +91,6 @@
 [submodule "bundle/fountain"]
 	path = bundle/fountain
 	url = https://github.com/vim-scripts/fountain.vim.git
-[submodule "bundle/minibufexplorer"]
-	path = bundle/minibufexplorer
-	url = https://github.com/techlivezheng/vim-plugin-minibufexpl.git
 [submodule "bundle/vim-coffee-script"]
 	path = bundle/vim-coffee-script
 	url = https://github.com/AndrewRadev/vim-coffee-script.git
@@ -106,3 +100,9 @@
 [submodule "bundle/vim-distinguished"]
 	path = bundle/vim-distinguished
 	url = https://github.com/Lokaltog/vim-distinguished.git
+[submodule "bundle/vim-go"]
+	path = bundle/vim-go
+	url = https://github.com/fatih/vim-go.git
+[submodule "bundle/vim-airline"]
+	path = bundle/vim-airline
+	url = git@github.com:bling/vim-airline.git

@@ -192,6 +192,7 @@ set nofoldenable
 "" Set custom filetypes
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ejs set filetype=html.js
+autocmd! BufNewFile,BufRead *.handlebars set filetype=html.js
 autocmd! BufRead,BufNewFile *.fountain	 set filetype=fountain
 
 "" Define custom indentation for filetypes
@@ -710,3 +711,26 @@ nnoremap <leader>r :%s/\v/<left>
 nnoremap _md :set ft=markdown<CR>
 nnoremap _py :set ft=python
 nnoremap _js :set ft=javascript<CR>
+
+""Reload VIM
+map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+""Use sudo to open/edit a file
+cmap w!! w !sudo tee % >/dev/null
+
+" vim-airline {
+
+    " airline tabline
+    let g:airline#extensions#tabline#enabled = 1
+
+    " display tab number
+    let g:airline#extensions#tabline#tab_nr_type = 1
+
+    " bufferline
+    let g:airline#extensions#bufferline#enabled = 1
+
+    " display buffer number
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" }
+
