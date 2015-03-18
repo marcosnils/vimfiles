@@ -734,3 +734,5 @@ cmap w!! w !sudo tee % >/dev/null
 
 " }
 
+" Map \g to Gundo
+nnoremap <leader>g :GundoToggle<CR>
