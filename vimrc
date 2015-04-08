@@ -624,7 +624,7 @@ imap <silent> <F6> <C-O>:set nolist!<CR>
 map <silent> <F11> :call ToggleFullScreen()<CR>
 
 "" Closes buffer 
-nmap <C-x> :bd<CR>
+nmap <C-x> :Bclose<CR>
 
 "" Closes current window
 nnoremap <M-w> <C-w>c<esc>
