@@ -99,7 +99,7 @@
 	url = https://github.com/fatih/vim-go.git
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
-	url = https://github.com:bling/vim-airline.git
+	url = https://github.com/bling/vim-airline.git
 [submodule "bundle/tlib_vim"]
 	path = bundle/tlib_vim
 	url = https://github.com/tomtom/tlib_vim.git
