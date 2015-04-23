@@ -597,7 +597,7 @@ nmap <C-N> :enew<CR>
 
 "" Cycles between windows
 nnoremap <leader><tab> <C-W>w
-nnoremap <tab> <C-W>w
+
 
 "" Cycles between buffers
 map <silent> <C-tab> :buffer #<CR>
