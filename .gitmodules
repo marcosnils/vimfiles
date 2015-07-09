@@ -43,9 +43,6 @@
 [submodule "bundle/Arduino-syntax"]
 	path = bundle/Arduino-syntax
 	url = https://github.com/vim-scripts/Arduino-syntax-file.git
-  [submodule "bundle/tlib"]
-	path = bundle/tlib
-	url = https://github.com/tomtom/tlib_vim.git
 [submodule "bundle/vim-addon-mw-utils"]
 	path = bundle/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
