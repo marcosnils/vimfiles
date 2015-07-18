@@ -469,12 +469,6 @@ let NERDTreeShowHidden=1
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
-"" Taglist configuration
-let Tlist_Use_Right_Window = 1
-let Tlist_Auto_Highlight_Tag = 1
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Show_One_File = 1
-let Tlist_Sort_Type = "name"
 
 "" TabBar Settings
 let g:Tb_MoreThanOne= 0
@@ -648,7 +642,7 @@ nnoremap <leader>s <C-w>v<C-w>l
 nnoremap <leader>h :split<CR>
 
 "" Taglist Toggle
-map <silent> <leader>tl :TlistToggle<CR>
+map <silent> <leader>tl :TagbarToggle<CR>
 
 "" Search word under cursor
 nnoremap , /<C-R><C-W><CR>N
