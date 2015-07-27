@@ -686,6 +686,7 @@ cmap w!! w !sudo tee % >/dev/null
 
 " paste from system clipboard
 nnoremap <leader>p :set paste<CR>"+p<CR>:set nopaste<CR>
+
 " yank to system clipboard
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y"
@@ -819,3 +820,5 @@ nnoremap <leader>g :GundoToggle<CR>
     " Tell Neosnippet about the other snippets
     let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
+" Make vim-go use goimports on save by default
+let g:go_fmt_command = "goimports"
