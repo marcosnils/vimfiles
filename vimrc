@@ -15,14 +15,6 @@ set hidden
 set nobackup
 set noswapfile
 
-"" Loads standard MS-Windows way of CTRL-X, CTRL-C and CTRL-V
-"source $VIMRUNTIME/mswin.vim
-"behave mswin
-
-""  Set cursor selection mode and prevent entering select mode (prefer visual mode).
-"set selection=exclusive
-"set selectmode=mouse,key,cmd
-
 " set English language
 set langmenu=none
 
@@ -31,9 +23,6 @@ if version >= 700
     set spl=en spell
     set nospell
 endif
-
-"enable mouse (if I want to use mouse)
-"set mouse=a
 
 
 " Better modes.  Remeber where we are, support yankring
@@ -247,7 +236,7 @@ function! UpdateSession()
         let b:sessiondir = $HOME
         let b:sessionfile = b:sessiondir . "/.session.vim"
         "if !(filereadable(b:sessionfile))
-            ":call MakeSession()
+        ":call MakeSession()
         "endif
         exe "mksession! " . b:sessionfile
         echo "updating session"
@@ -290,15 +279,15 @@ endfunction
 "" Indent files. Use plugin when filetype is Javascript.
 function! IndentFile()
     "if &filetype == 'javascript'
-        "let l = line('.')
-        "let c = col('.')
-        "call g:Jsbeautify()
-        "call cursor(l,c)
+    "let l = line('.')
+    "let c = col('.')
+    "call g:Jsbeautify()
+    "call cursor(l,c)
     "else
-        let l = line('.')
-        let c = col('.')
-        execute "normal! gg=G"
-        call cursor(l,c)
+    let l = line('.')
+    let c = col('.')
+    execute "normal! gg=G"
+    call cursor(l,c)
     "endif
 endfunction
 
@@ -504,33 +493,6 @@ au BufNewFile,BufReadPost *.js let g:ackprg="ack --ignore-dir=node_modules -H --
 "" all plugins. Be careful.
 function! AfterMappings()
 
-    " CTRL-X and SHIFT-Del are Cut
-    vnoremap <C-X> "+x
-    vnoremap <S-Del> "+x
-
-    " CTRL-C and CTRL-Insert are Copy
-    vnoremap <C-C> "+y
-    vnoremap <C-Insert> "+y
-
-    "<Ctrl-V> -- paste
-    nm \\paste\\ "=@*.'xy'<CR>gPFx"_2x:echo<CR>
-    imap <C-V> x<Esc>\\paste\\"_s
-    vmap <C-V> "-cx<Esc>\\paste\\"_x
-
-    "Edit mapping (make cursor keys work like in Windows: <C-Left><C-Right>
-    "Move to next word.
-
-    "These mappings are used when set selectmode= (Visual Mode).
-    "nnoremap <C-Left> b
-    "vnoremap <C-S-Left> <C-O>b
-    "nnoremap <C-S-Left> gh<C-G>b
-    "inoremap <C-S-Left> <C-\><C-O>gh<C-G>b
-
-    "nnoremap <C-Right> e
-    "vnoremap <C-S-Right> <C-O>e
-    "nnoremap <C-S-Right> gh<C-G>e
-    "inoremap <C-S-Right> <C-\><C-O>gh<C-G>e
-    
     " These mappings are used when set selectmode=mouse,key,cmd (Select Mode).
     nnoremap <C-Left> b
     vnoremap <C-S-Left> b
@@ -617,7 +579,7 @@ imap <silent> <F6> <C-O>:set nolist!<CR>
 "" Toggle full screen mode
 map <silent> <F11> :call ToggleFullScreen()<CR>
 
-"" Closes buffer 
+"" Closes buffer
 nmap <C-x> :Bclose<CR>
 
 "" Closes current window
@@ -694,17 +656,17 @@ vnoremap <leader>y "+y"
 
 " vim-airline {
 
-    " airline tabline
-    let g:airline#extensions#tabline#enabled = 1
+" airline tabline
+let g:airline#extensions#tabline#enabled = 1
 
-    " display tab number
-    let g:airline#extensions#tabline#tab_nr_type = 1
+" display tab number
+let g:airline#extensions#tabline#tab_nr_type = 1
 
-    " bufferline
-    let g:airline#extensions#bufferline#enabled = 1
+" bufferline
+let g:airline#extensions#bufferline#enabled = 1
 
-    " display buffer number
-    let g:airline#extensions#tabline#buffer_nr_show = 1
+" display buffer number
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " }
 
@@ -713,112 +675,121 @@ nnoremap <leader>g :GundoToggle<CR>
 
 "" Neocomplete
 
-    " Disable AutoComplPop.
-    let g:acp_enableAtStartup = 0
-    " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 1
-    " Use smartcase.
-    let g:neocomplete#enable_smart_case = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-    " Define dictionary.
-    let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+            \ 'default' : '',
+            \ 'vimshell' : $HOME.'/.vimshell_hist',
+            \ 'scheme' : $HOME.'/.gosh_completions'
             \ }
 
-    " Define keyword.
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-    " Plugin key-mappings.
-    inoremap <expr><C-g>     neocomplete#undo_completion()
-    inoremap <expr><C-l>     neocomplete#complete_common_string()
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-    " Recommended key-mappings.
-    " <CR>: close popup and save indent.
-    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-    function! s:my_cr_function()
-      "return neocomplete#close_popup() . "\<CR>"
-      " For no inserting <CR> key.
-      return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-    endfunction
-    " <TAB>: completion.
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><C-y>  neocomplete#close_popup()
-    inoremap <expr><C-e>  neocomplete#cancel_popup()
-    " Close popup by <Space>.
-    "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+    "return neocomplete#close_popup() . "\<CR>"
+    " For no inserting <CR> key.
+    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
-    " For cursor moving in insert mode(Not recommended)
-    "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-    "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-    "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-    "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-    " Or set this.
-    "let g:neocomplete#enable_cursor_hold_i = 1
-    " Or set this.
-    "let g:neocomplete#enable_insert_char_pre = 1
+" For cursor moving in insert mode(Not recommended)
+"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+" Or set this.
+"let g:neocomplete#enable_cursor_hold_i = 1
+" Or set this.
+"let g:neocomplete#enable_insert_char_pre = 1
 
-    " AutoComplPop like behavior.
-    "let g:neocomplete#enable_auto_select = 1
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
 
-    " Shell like behavior(not recommended).
-    "set completeopt+=longest
-    "let g:neocomplete#enable_auto_select = 1
-    "let g:neocomplete#disable_auto_complete = 1
-    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-    " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-    " Enable heavy omni completion.
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-      let g:neocomplete#sources#omni#input_patterns = {}
-    endif
-    "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-    "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
-    " For perlomni.vim setting.
-    " https://github.com/c9s/perlomni.vim
-    let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 "" Neosnippet
-    " Plugin key-mappings.
-    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k>     <Plug>(neosnippet_expand_target)
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-    " SuperTab like snippets behavior.
-    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)"
-    \: pumvisible() ? "\<C-n>" : "\<TAB>"
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)"
-    \: "\<TAB>"
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+            \ "\<Plug>(neosnippet_expand_or_jump)"
+            \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+            \ "\<Plug>(neosnippet_expand_or_jump)"
+            \: "\<TAB>"
 
-    " For snippet_complete marker.
-    if has('conceal')
-      set conceallevel=2 concealcursor=i
-    endif
-    " Enable snipMate compatibility feature.
-    let g:neosnippet#enable_snipmate_compatibility = 1
+" For snippet_complete marker.
+if has('conceal')
+    set conceallevel=2 concealcursor=i
+endif
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
 
-    " Tell Neosnippet about the other snippets
-    let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
-" Make vim-go use goimports on save by default
+" vim-go settings
 let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+set completeopt-=preview
+
+set synmaxcol=250
