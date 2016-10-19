@@ -659,3 +659,5 @@ let g:go_auto_sameids = 1
 set completeopt-=preview
 
 set synmaxcol=250
+
+let g:completor_go_omni_trigger = '(?:\b[^\W\d]\w*|[\]\)])\.(?:[^\W\d]\w*)?'
