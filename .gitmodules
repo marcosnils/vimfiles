@@ -109,3 +109,6 @@
 [submodule "bundle/vim-hclfmt"]
 	path = bundle/vim-hclfmt
 	url = https://github.com/fatih/vim-hclfmt.git
+[submodule "bundle/delimitMate"]
+	path = bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
