@@ -493,7 +493,7 @@ nnoremap <silent> <leader>m :CtrlPMRUFiles<CR>
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 "" Edits vimrc file
-map <leader>e :e $HOME/.config/nvim/init.vim<CR>
+map <leader>e :e $HOME/.vimrc<CR>
 
 "" Duplicates current line
 nnoremap <leader>d Yp
@@ -646,6 +646,11 @@ endif
 
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+" which disables all runtime snippets
+let g:neosnippet#disable_runtime_snippets = {
+            \   '_' : 1,
+            \ }
 
 " vim-go settings
 let g:go_fmt_command = "goimports"
