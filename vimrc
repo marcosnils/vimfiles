@@ -495,9 +495,6 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 "" Edits vimrc file
 map <leader>e :e $HOME/.vimrc<CR>
 
-"" Duplicates current line
-nnoremap <leader>d Yp
-snoremap <leader>d <C-O>Yp
 
 "" Creates new empty buffer
 nmap <C-N> :enew<CR>
@@ -660,9 +657,9 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_auto_sameids = 1
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 
 set completeopt-=preview
 
 set synmaxcol=250
 
-let g:completor_go_omni_trigger = '(?:\b[^\W\d]\w*|[\]\)])\.(?:[^\W\d]\w*)?'
