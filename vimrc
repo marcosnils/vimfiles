@@ -159,6 +159,7 @@ autocmd FileType jade :setlocal sw=2 ts=2 sts=2
 autocmd FileType less :setlocal sw=2 ts=2 sts=2
 autocmd FileType coffee :setlocal sw=2 ts=2 sts=2
 autocmd FileType ruby,eruby :setlocal sw=2 ts=2 sts=2
+autocmd FileType tf :setlocal sw=2 ts=2 sts=2
 
 "" Disable AutoClose plugin on markdown files"
 "let g:AutoCloseProtectedRegions = []
@@ -308,72 +309,6 @@ augroup END
 set updatetime=500
 
 
-"" Full screen function
-let g:fullscreenmode = 0
-function! ToggleFullScreen()
-    if g:fullscreenmode == 0
-        let g:fullscreenmode = 1
-        if exists('+colorcolumn')
-            set colorcolumn=
-        endif
-        let g:oldColumns = &columns
-        let g:oldLines = &lines
-        set nonumber
-        set laststatus=0
-        set rulerformat=%40(%{WordCount()}\ words%=%(%c:%l/%L%)\ (%p%%)%)
-        set linespace=3
-        set guioptions-=mr
-        set guioptions-=Tb
-        if has("gui_running")
-            " GUI is running or is about to start.
-            " Maximize gvim window.
-            set lines=999 columns=999
-        else
-            " This is console Vim.
-            if exists("+lines")
-                set lines=50
-            endif
-            if exists("+columns")
-                set columns=100
-            endif
-        endif
-        if has("gui_macvim")
-            " Settings for WriteRoom like mode.
-            set lines=999 columns=80
-            set fuoptions=background:Normal
-            hi NonText guifg=bg
-            set fullscreen
-        else
-            set numberwidth=10
-            set foldcolumn=12
-            hi FoldColumn ctermbg=none
-            hi LineNr ctermfg=0 ctermbg=none
-            hi NonText ctermfg=0
-        endif
-        :CMiniBufExplorer
-    else
-        let g:fullscreenmode = 0
-        set linespace=0
-        set guioptions+=mr
-        set guioptions+=Tb
-        set laststatus=2
-        set number
-        if has("gui_macvim")
-            set nofullscreen
-        else
-            set numberwidth=4
-            set foldcolumn=0
-            execute 'colorscheme ' . g:colors_name
-        endif
-        let &columns=g:oldColumns
-        let &lines=g:oldLines
-        if exists('+colorcolumn')
-            let &colorcolumn=g:colorcol
-        endif
-        :MiniBufExplorer
-        "execute "normal \<c-w>w"
-    endif
-endfunction
 
 "" Fix for quitting with just one window open (MiniBufExplorer bug)
 au BufEnter * call MyLastWindow()
@@ -395,7 +330,7 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-autocmd FileType c,cpp,java,php,ruby,eruby,python,javascript,coffee,jade,sass,less,scss autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType c,cpp,java,php,ruby,eruby,python,javascript,coffee,jade,sass,less,scss,go autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 """""""""""""""""""""""""""""""""""""""
 """""""""" Plugin Parameters """"""""""
@@ -502,7 +437,6 @@ nmap <C-N> :enew<CR>
 "" Cycles between windows
 nnoremap <leader><tab> <C-W>w
 
-
 "" Cycles between buffers
 map <silent> <C-tab> :buffer #<CR>
 
@@ -524,8 +458,6 @@ imap <F5> <C-O>:set nowrap!<CR>
 map <silent> <F6> :set nolist!<CR>
 imap <silent> <F6> <C-O>:set nolist!<CR>
 
-"" Toggle full screen mode
-map <silent> <F11> :call ToggleFullScreen()<CR>
 
 "" Closes buffer
 nmap <C-x> :Bclose<CR>
@@ -658,8 +590,9 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_auto_sameids = 1
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap gi <Plug>(go-info)
 
-set completeopt-=preview
+set completeopt=menu,menuone
 
 set synmaxcol=250
 
