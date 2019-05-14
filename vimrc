@@ -157,6 +157,7 @@ autocmd! BufRead,BufNewFile *.fountain	 set filetype=fountain
 autocmd FileType javascript :setlocal sw=2 ts=2 sts=2
 autocmd FileType jade :setlocal sw=2 ts=2 sts=2
 autocmd FileType less :setlocal sw=2 ts=2 sts=2
+autocmd FileType yaml :setlocal sw=2 ts=2 sts=2
 autocmd FileType coffee :setlocal sw=2 ts=2 sts=2
 autocmd FileType ruby,eruby :setlocal sw=2 ts=2 sts=2
 autocmd FileType tf :setlocal sw=2 ts=2 sts=2
@@ -568,10 +569,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
             \ "\<Plug>(neosnippet_expand_or_jump)"
             \: "\<TAB>"
 
-" For snippet_complete marker.
-if has('conceal')
-    set conceallevel=2 concealcursor=i
-endif
 
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
@@ -584,15 +581,20 @@ let g:neosnippet#disable_runtime_snippets = {
 " vim-go settings
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_highlight_function_calls = 1
 let g:go_auto_sameids = 1
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dh <Plug>(go-def-split)
 au FileType go nmap gi <Plug>(go-info)
 
 set completeopt=menu,menuone
-
 set synmaxcol=250
 
+"noremap <Up> <nop>
+"noremap <Down> <nop>
+"noremap <Left> <nop>
+"noremap <Right> <nop>
