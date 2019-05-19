@@ -161,6 +161,8 @@ autocmd FileType yaml :setlocal sw=2 ts=2 sts=2
 autocmd FileType coffee :setlocal sw=2 ts=2 sts=2
 autocmd FileType ruby,eruby :setlocal sw=2 ts=2 sts=2
 autocmd FileType tf :setlocal sw=2 ts=2 sts=2
+autocmd FileType html :setlocal sw=2 ts=2 sts=2
+
 
 "" Disable AutoClose plugin on markdown files"
 "let g:AutoCloseProtectedRegions = []
