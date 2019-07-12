@@ -464,6 +464,11 @@ imap <silent> <F6> <C-O>:set nolist!<CR>
 "" Closes buffer
 nmap <C-x> :Bclose<CR>
 
+nmap <C-x> :Bclose<CR>
+
+"" Remaps Shift + v to select line without newline char
+nnoremap <S-v> ^vg_
+
 "" Closes current window
 nnoremap <M-w> <C-w>c<esc>
 
@@ -516,12 +521,6 @@ map J gJ
 
 "" Replace
 nnoremap <leader>r :%s/\v/<left>
-
-" Easy filetype switching
-nnoremap _md :set ft=markdown<CR>
-nnoremap _py :set ft=python
-nnoremap _js :set ft=javascript<CR>
-nnoremap _yml :set ft=yaml<CR>
 
 ""Reload VIM
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
