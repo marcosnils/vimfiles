@@ -1,5 +1,4 @@
 filetype off
-call pathogen#infect()
 
 "" Use Vim settings, rather then Vi settings (much better!).
 "" This must be first, because it changes other options as a side effect.
@@ -713,3 +712,7 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+" Terraform
+let g:terraform_fmt_on_save=1
