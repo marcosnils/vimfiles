@@ -174,20 +174,9 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>="
 
-"" Status line
-augroup ft_statuslinecolor
-    au!
-    au InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
-    au InsertLeave * hi StatusLine ctermfg=59 guifg=#4d5057
-augroup END
+" Status line
 set laststatus=2
-set statusline=
-set statusline+=%F\ %m\ %r
-set statusline+=%{fugitive#statusline()}
-set statusline+=%=
-set statusline+=\ [%{&encoding}\ %{&fileformat}\ %{strlen(&ft)?&ft:'none'}]
-set statusline+=\ %{WordCount()}\ words
-set statusline+=\ \ %(%c:%l/%L%)\ (%p%%)
+
 
 """""""""""""""""""""""""""""""""""""""
 """""""""""""  Functions  """""""""""""
@@ -466,7 +455,7 @@ nmap <C-x> :Bclose<CR>
 nmap <C-x> :Bclose<CR>
 
 "" Remaps Shift + v to select line without newline char
-nnoremap <S-v> ^vg_
+nnoremap <leader>v 0vg_
 
 "" Closes current window
 nnoremap <M-w> <C-w>c<esc>
@@ -496,7 +485,7 @@ map <silent> <leader>tl :TagbarToggle<CR>
 nnoremap , /<C-R><C-W><CR>N
 
 "" Clear highlight
-nnoremap <silent> <leader><space> :noh<CR>:call clearmatches()<CR>
+nnoremap <silent> <leader><space> :noh<CR>
 
 "" Make cursor move as expected with wrapped lines (in insert mode only with Ctrl key)
 nnoremap <silent> <Up> gk
@@ -571,7 +560,7 @@ let g:go_gocode_propose_source = 1
 let g:go_modifytags_transform = 'camelcase'
 let g:go_fold_enable = []
 let g:go_auto_sameids = 1
-let g:go_info_mode = "gocode"
+let g:go_info_mode = "gopls"
 let g:go_def_mode = "gopls"
 let g:go_list_type = "quickfix"
 let g:go_echo_command_info = 1
@@ -712,7 +701,6 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
 
 " Terraform
 let g:terraform_fmt_on_save=1
