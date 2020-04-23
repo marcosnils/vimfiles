@@ -119,3 +119,6 @@
 [submodule "pack/plugins/start/vim-base64.vim"]
 	path = pack/plugins/start/vim-base64.vim
 	url = https://github.com/christianrondeau/vim-base64.git
+[submodule "pack/plugins/start/rust.vim"]
+	path = pack/plugins/start/rust.vim
+	url = https://github.com/rust-lang/rust.vim
