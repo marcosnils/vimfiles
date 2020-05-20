@@ -560,8 +560,6 @@ let g:go_gocode_propose_source = 1
 let g:go_modifytags_transform = 'camelcase'
 let g:go_fold_enable = []
 let g:go_auto_sameids = 1
-let g:go_info_mode = "gopls"
-let g:go_def_mode = "gopls"
 let g:go_list_type = "quickfix"
 let g:go_echo_command_info = 1
 
