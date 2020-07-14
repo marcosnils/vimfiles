@@ -415,7 +415,7 @@ noremap <Leader>mm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 "" Toggle Last used files list
 nnoremap <silent> <leader>m :CtrlPMRUFiles<CR>
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
 
 "" Edits vimrc file
 map <leader>e :e $HOME/.vimrc<CR>
@@ -560,6 +560,7 @@ let g:go_gocode_propose_source = 1
 let g:go_modifytags_transform = 'camelcase'
 let g:go_fold_enable = []
 let g:go_auto_sameids = 1
+let g:go_implements_mode = "gopls"
 let g:go_list_type = "quickfix"
 let g:go_echo_command_info = 1
 

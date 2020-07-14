@@ -34,12 +34,6 @@
 [submodule "bundle/vim-unimpaired"]
 	path = pack/plugins/start/vim-unimpaired
 	url = http://github.com/tpope/vim-unimpaired.git
-[submodule "bundle/vim-jade"]
-	path = pack/plugins/start/vim-jade
-	url = http://github.com/digitaltoad/vim-jade.git
-[submodule "bundle/Arduino-syntax"]
-	path = pack/plugins/start/Arduino-syntax
-	url = https://github.com/vim-scripts/Arduino-syntax-file.git
 [submodule "bundle/vim-addon-mw-utils"]
 	path = pack/plugins/start/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
