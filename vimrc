@@ -481,6 +481,7 @@ nnoremap <leader>h :split<CR>
 "" Taglist Toggle
 map <silent> <leader>tl :TagbarToggle<CR>
 
+
 "" Search word under cursor
 nnoremap , /<C-R><C-W><CR>N
 
