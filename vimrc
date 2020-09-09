@@ -454,7 +454,7 @@ nmap <C-x> :Bclose<CR>
 
 nmap <C-x> :Bclose<CR>
 
-"" Remaps Shift + v to select line without newline char
+"" Remaps Shift + v to select line without newline char in visual mode
 nnoremap <leader>v 0vg_
 
 "" Closes current window
