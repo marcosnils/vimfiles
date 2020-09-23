@@ -14,6 +14,9 @@ set hidden
 set nobackup
 set noswapfile
 
+" set column color to 80 chars
+set colorcolumn=80
+
 " set English language
 set langmenu=none
 
@@ -153,7 +156,6 @@ autocmd! BufRead,BufNewFile *.fountain	 set filetype=fountain
 
 "" Define custom indentation for filetypes
 autocmd FileType javascript :setlocal sw=2 ts=2 sts=2
-autocmd FileType jade :setlocal sw=2 ts=2 sts=2
 autocmd FileType less :setlocal sw=2 ts=2 sts=2
 autocmd FileType yaml :setlocal sw=2 ts=2 sts=2
 autocmd FileType coffee :setlocal sw=2 ts=2 sts=2
@@ -621,8 +623,8 @@ else
 endif
 
 " Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
