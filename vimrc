@@ -708,3 +708,18 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Terraform
 let g:terraform_fmt_on_save=1
+
+function! s:fzf_root()
+    let dir = trim(system("git rev-parse --show-toplevel"))
+    echom dir
+    if !empty(dir)
+      execute 'FZF' dir
+      return
+    endif
+  endfor
+  FZF
+endfunction
+
+" FZF
+nmap <C-P> :call <SID>fzf_root() <CR>
+let g:fzf_layout = { 'down': '20%' }
