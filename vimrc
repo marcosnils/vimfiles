@@ -415,10 +415,6 @@ nnoremap <silent> <leader>RR :bufdo call IndentFile()<CR>:let _s=@/<Bar>:%s/\s\+
 "" Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>mm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-"" Toggle Last used files list
-nnoremap <silent> <leader>m :CtrlPMRUFiles<CR>
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
-
 "" Edits vimrc file
 map <leader>e :e $HOME/.vimrc<CR>
 
@@ -597,6 +593,9 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
+" Remap so it doesn't conflicts with vim-coc   
+let g:UltiSnipsExpandTrigger="<c-tab>"
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -614,13 +613,11 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-b> coc#refresh()
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
