@@ -148,20 +148,17 @@ set sessionoptions=buffers,curdir,folds,help,winpos,winsize,tabpages,unix,slash,
 "" Disable code folding
 set nofoldenable
 
-"" Set custom filetypes
-autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
-autocmd! BufNewFile,BufRead *.ejs set filetype=html.js
-autocmd! BufNewFile,BufRead *.handlebars set filetype=html.js
-autocmd! BufRead,BufNewFile *.fountain	 set filetype=fountain
 
 "" Define custom indentation for filetypes
 autocmd FileType javascript :setlocal sw=2 ts=2 sts=2
 autocmd FileType less :setlocal sw=2 ts=2 sts=2
 autocmd FileType yaml :setlocal sw=2 ts=2 sts=2
+autocmd FileType typescript :setlocal sw=2 ts=2 sts=2
 autocmd FileType coffee :setlocal sw=2 ts=2 sts=2
 autocmd FileType ruby,eruby :setlocal sw=2 ts=2 sts=2
 autocmd FileType tf :setlocal sw=2 ts=2 sts=2
 autocmd FileType html :setlocal sw=2 ts=2 sts=2
+autocmd FileType json :setlocal sw=2 ts=2 sts=2
 
 
 "" Disable AutoClose plugin on markdown files"
@@ -559,7 +556,6 @@ let g:go_gocode_propose_source = 1
 let g:go_modifytags_transform = 'camelcase'
 let g:go_fold_enable = []
 let g:go_auto_sameids = 1
-let g:go_implements_mode = "gopls"
 let g:go_list_type = "quickfix"
 let g:go_echo_command_info = 1
 
@@ -723,3 +719,6 @@ endfunction
 " FZF
 nmap <C-P> :call <SID>fzf_root() <CR>
 let g:fzf_layout = { 'down': '20%' }
+
+" Disable quote concealing in JSON files
+let g:vim_json_conceal=0
