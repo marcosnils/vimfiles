@@ -445,9 +445,7 @@ imap <silent> <F6> <C-O>:set nolist!<CR>
 
 
 "" Closes buffer
-nmap <C-x> :Bclose<CR>
-
-nmap <C-x> :Bclose<CR>
+nmap <C-x> :bdelete<CR>
 
 "" Remaps Shift + v to select line without newline char in visual mode
 nnoremap <leader>v 0vg_
@@ -496,9 +494,6 @@ inoremap \fn <C-R>=expand("%:t:r")<CR>
 map <leader>fu :set ff=unix<CR>
 map <leader>fd :set ff=dos<CR>
 map <leader>fm :set ff=mac<CR>
-
-"" Generate rtf from markdown using Pandoc
-command! PR :!pandoc "%" -o "%:t:r.rtf" -t rtf -s
 
 "" Remaps J to gJ to join lines without spaces
 map J gJ
@@ -562,7 +557,6 @@ let g:go_fillstruct_mode="gopls"
 
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dh <Plug>(go-def-split)
-au FileType go nmap gi <Plug>(go-info)
 
 set completeopt=menu,menuone
 set synmaxcol=250
@@ -704,7 +698,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Terraform
-let g:terraform_fmt_on_save=1
+let g:terraform_fmt_on_save=0
 
 function! s:fzf_root()
     let dir = trim(system("git rev-parse --show-toplevel"))
