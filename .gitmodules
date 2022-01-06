@@ -76,9 +76,6 @@
 [submodule "bundle/vim-airline"]
 	path = pack/plugins/start/vim-airline
 	url = https://github.com/bling/vim-airline.git
-[submodule "bundle/tlib_vim"]
-	path = pack/plugins/start/tlib_vim
-	url = https://github.com/tomtom/tlib_vim.git
 [submodule "bundle/vim-snippets"]
 	path = pack/plugins/start/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
@@ -100,10 +97,6 @@
 [submodule "pack/plugins/start/vim-terraform"]
 	path = pack/plugins/start/vim-terraform
 	url = https://github.com/hashivim/vim-terraform.git
-[submodule "pack/plugins/start/coc.vim"]
-	path = pack/plugins/start/coc.vim
-	url = https://github.com/neoclide/coc.nvim
-	branch = release
 [submodule "pack/plugins/start/vim-base64.vim"]
 	path = pack/plugins/start/vim-base64.vim
 	url = https://github.com/christianrondeau/vim-base64.git
