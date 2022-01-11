@@ -70,9 +70,6 @@
 [submodule "bundle/vim-distinguished"]
 	path = pack/plugins/start/vim-distinguished
 	url = https://github.com/Lokaltog/vim-distinguished.git
-[submodule "bundle/vim-go"]
-	path = pack/plugins/start/vim-go
-	url = https://github.com/fatih/vim-go.git
 [submodule "bundle/vim-airline"]
 	path = pack/plugins/start/vim-airline
 	url = https://github.com/bling/vim-airline.git
@@ -112,3 +109,24 @@
 [submodule "pack/plugins/start/typescript-vim"]
 	path = pack/plugins/start/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim.git
+[submodule "pack/plugins/start/nvm-lspconfig"]
+	path = pack/plugins/start/nvm-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig.git
+[submodule "pack/plugins/start/nvim-cmp"]
+	path = pack/plugins/start/nvim-cmp
+	url = https://github.com/hrsh7th/nvim-cmp
+[submodule "pack/plugins/start/cmp-buffer"]
+	path = pack/plugins/start/cmp-buffer
+	url = https://github.com/hrsh7th/cmp-buffer
+[submodule "pack/plugins/start/cmp-path"]
+	path = pack/plugins/start/cmp-path
+	url = https://github.com/hrsh7th/cmp-path
+[submodule "pack/plugins/start/cmp-cmdline"]
+	path = pack/plugins/start/cmp-cmdline
+	url = https://github.com/hrsh7th/cmp-cmdline
+[submodule "pack/plugins/start/LuaSnip"]
+	path = pack/plugins/start/LuaSnip
+	url = https://github.com/L3MON4D3/LuaSnip
+[submodule "pack/plugins/start/cmp-nvim-lsp"]
+	path = pack/plugins/start/cmp-nvim-lsp
+	url = https://github.com/hrsh7th/cmp-nvim-lsp

@@ -413,7 +413,7 @@ nnoremap <silent> <leader>RR :bufdo call IndentFile()<CR>:let _s=@/<Bar>:%s/\s\+
 noremap <Leader>mm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 "" Edits vimrc file
-map <leader>e :e $HOME/.vimrc<CR>
+map <leader>e :e $HOME/.config/nvim/init.vim<CR>
 
 
 "" Creates new empty buffer
@@ -502,7 +502,7 @@ map J gJ
 nnoremap <leader>r :%s/\v/<left>
 
 ""Reload VIM
-map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <silent> <leader>V :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>:exe ":echo 'config reloaded'"<CR>
 
 ""Use sudo to open/edit a file
 cmap w!! w !sudo tee % >/dev/null
@@ -535,30 +535,10 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 nnoremap <leader>g :GundoToggle<CR>
 
 
-" vim-go settings
-let g:godef_mapping_enabled = 0
-let g:go_fmt_command = "goimports"
-let g:go_highlight_space_tab_error = 0
-let g:go_highlight_array_whitespace_error = 0
-let g:go_highlight_trailing_whitespace_error = 0
-let g:go_highlight_extra_types = 0
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_types = 0
-let g:go_highlight_operators = 1
-let g:go_highlight_format_strings = 0
-let g:go_highlight_function_calls = 1
-let g:go_gocode_propose_source = 1
-let g:go_modifytags_transform = 'camelcase'
-let g:go_fold_enable = []
-let g:go_auto_sameids = 1
-let g:go_list_type = "quickfix"
-let g:go_echo_command_info = 1
-let g:go_fillstruct_mode="gopls"
-
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dh <Plug>(go-def-split)
 
-set completeopt=menu,menuone
+set completeopt=menu,menuone,noselect
 set synmaxcol=250
 
 
@@ -566,13 +546,12 @@ set synmaxcol=250
 let g:terraform_fmt_on_save=0
 
 function! s:fzf_root()
-    let dir = trim(system("git rev-parse --show-toplevel"))
+    let dir = trim(system("git rev-parse --show-toplevel 2> /dev/null"))
     echom dir
     if !empty(dir)
       execute 'FZF' dir
       return
     endif
-  endfor
   FZF
 endfunction
 
@@ -582,3 +561,113 @@ let g:fzf_layout = { 'down': '20%' }
 
 " Disable quote concealing in JSON files
 let g:vim_json_conceal=0
+
+
+"Go
+lua require('go')
+
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.go lua goimports(1000)
+
+lua <<EOF
+
+local cmp_status_ok, cmp = pcall(require, "cmp")
+if not cmp_status_ok then
+  return
+end
+
+local snip_status_ok, luasnip = pcall(require, "luasnip")
+if not snip_status_ok then
+  return
+end
+
+require("luasnip/loaders/from_vscode").lazy_load()
+
+local check_backspace = function()
+  local col = vim.fn.col "." - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+end
+
+-- find more here: https://www.nerdfonts.com/cheat-sheet
+
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body) -- For `luasnip` users.
+    end,
+  },
+  mapping = {
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
+		["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    ["<C-e>"] = cmp.mapping {
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    },
+    -- Accept currently selected item. If none selected, `select` first item.
+    -- Set `select` to `false` to only confirm explicitly selected items.
+    ["<CR>"] = cmp.mapping.confirm { select = true },
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expandable() then
+        luasnip.expand()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif check_backspace() then
+        fallback()
+      else
+        fallback()
+      end
+    end, {
+      "i",
+      "s",
+    }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, {
+      "i",
+      "s",
+    }),
+  },
+  formatting = {
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, vim_item)
+      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+      vim_item.menu = ({
+        nvim_lsp = "[LSP]",
+        luasnip = "[Snippet]",
+        buffer = "[Buffer]",
+        path = "[Path]",
+      })[entry.source.name]
+      return vim_item
+    end,
+  },
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+    { name = "buffer" },
+    { name = "path" },
+  },
+  confirm_opts = {
+    behavior = cmp.ConfirmBehavior.Replace,
+    select = false,
+  },
+  documentation = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  },
+  experimental = {
+    ghost_text = false,
+    native_menu = false,
+  },
+}
+EOF
