@@ -235,20 +235,6 @@ function! Home()
     endif
 endfunction
 
-"" Indent files. Use plugin when filetype is Javascript.
-function! IndentFile()
-    "if &filetype == 'javascript'
-    "let l = line('.')
-    "let c = col('.')
-    "call g:Jsbeautify()
-    "call cursor(l,c)
-    "else
-    let l = line('.')
-    let c = col('.')
-    execute "normal! gg=G"
-    call cursor(l,c)
-    "endif
-endfunction
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -404,13 +390,6 @@ nnoremap <silent> <leader>W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl
 "" Do the same to all open buffers
 nnoremap <silent> <leader>WW :bufdo let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
-"" Reindent Code, strip trailing whitespace and go back to the line the cursor was
-nnoremap <silent> <leader>R :call IndentFile()<CR>:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-"" Do the same to all open buffers
-nnoremap <silent> <leader>RR :bufdo call IndentFile()<CR>:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-
-"" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>mm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 "" Edits vimrc file
 map <leader>e :e $HOME/.config/nvim/init.vim<CR>
@@ -515,21 +494,6 @@ nnoremap <leader>y "+y
 vnoremap <leader>y "+y"
 
 
-" vim-airline {
-
-" airline tabline
-let g:airline#extensions#tabline#enabled = 1
-
-" display tab number
-let g:airline#extensions#tabline#tab_nr_type = 1
-
-" bufferline
-let g:airline#extensions#bufferline#enabled = 1
-
-" display buffer number
-let g:airline#extensions#tabline#buffer_nr_show = 1
-
-" }
 
 " Map \g to Gundo
 nnoremap <leader>g :GundoToggle<CR>
@@ -559,15 +523,42 @@ endfunction
 nmap <C-P> :call <SID>fzf_root() <CR>
 let g:fzf_layout = { 'down': '20%' }
 
+
 " Disable quote concealing in JSON files
 let g:vim_json_conceal=0
+
+
+"Lualine
+lua require('lline')
+
+" airline tabline
+let g:airline#extensions#tabline#enabled = 1
+
+" display tab number
+let g:airline#extensions#tabline#tab_nr_type = 1
+
+" bufferline
+let g:airline#extensions#bufferline#enabled = 1
+
+" display buffer number
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" }
 
 
 "Go
 lua require('go')
 
+
+
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
-autocmd BufWritePre *.go lua goimports(1000)
+
+" trigger `autoread` when files changes on disk
+  set autoread
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+" notification after file change
+  autocmd FileChangedShellPost *
+    \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 lua <<EOF
 

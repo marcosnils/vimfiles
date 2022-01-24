@@ -70,9 +70,6 @@
 [submodule "bundle/vim-distinguished"]
 	path = pack/plugins/start/vim-distinguished
 	url = https://github.com/Lokaltog/vim-distinguished.git
-[submodule "bundle/vim-airline"]
-	path = pack/plugins/start/vim-airline
-	url = https://github.com/bling/vim-airline.git
 [submodule "bundle/vim-snippets"]
 	path = pack/plugins/start/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
@@ -130,3 +127,6 @@
 [submodule "pack/plugins/start/cmp-nvim-lsp"]
 	path = pack/plugins/start/cmp-nvim-lsp
 	url = https://github.com/hrsh7th/cmp-nvim-lsp
+[submodule "pack/plugins/start/lualine"]
+	path = pack/plugins/start/lualine
+	url = https://github.com/nvim-lualine/lualine.nvim
