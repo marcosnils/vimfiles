@@ -1,5 +1,3 @@
-filetype off
-
 "" Use Vim settings, rather then Vi settings (much better!).
 "" This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -284,19 +282,6 @@ augroup END
 set updatetime=500
 
 
-
-"" Fix for quitting with just one window open (MiniBufExplorer bug)
-au BufEnter * call MyLastWindow()
-function! MyLastWindow()
-    " if the window is quickfix go on
-    if &buftype=="nofile"
-        " if this window is last on screen quit without warning
-        if winnr('$') < 2
-            quit!
-        endif
-    endif
-endfunction
-
 "" Clear trailing whitespaces on save for some filetypes
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
@@ -329,19 +314,7 @@ let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
 
-"" TabBar Settings
-let g:Tb_MoreThanOne= 0
-let g:Tb_MaxSize = 3
-let g:Tb_MinSize = 1
-let g:Tb_ModSelTarget = 1
-let g:Tb_cTabSwitchBufs = 0
-let g:Tb_UseSingleClick = 1
-let g:did_tabbar_syntax_inits = 1
-highlight Tb_Normal guifg=#808080 guibg=fg
-highlight Tb_Changed guifg=#CD5907 guibg=fg
-highlight Tb_VisibleNormal guifg=#5DC2D6 guibg=fg
-highlight Tb_VisibleChanged guifg=#F1266F guibg=fg
-
+" Jekyll
 let g:jekyll_post_suffix = "md"
 
 
@@ -363,8 +336,8 @@ function! AfterMappings()
     nnoremap <C-S-Left> gh<C-O>b
     inoremap <C-S-Left> <C-\><C-O>gh<C-O>b
 
-    nnoremap <C-Right> w
     vnoremap <C-S-Right> w
+    nnoremap <C-Right> w
     nnoremap <C-S-Right> gh<C-O>w
     inoremap <C-S-Right> <C-\><C-O>gh<C-O>w
 
@@ -531,25 +504,12 @@ let g:vim_json_conceal=0
 "Lualine
 lua require('lline')
 
-" airline tabline
-let g:airline#extensions#tabline#enabled = 1
-
-" display tab number
-let g:airline#extensions#tabline#tab_nr_type = 1
-
-" bufferline
-let g:airline#extensions#bufferline#enabled = 1
-
-" display buffer number
-let g:airline#extensions#tabline#buffer_nr_show = 1
-
-" }
-
 
 "Go
 lua require('go')
 
-
+" Completion
+lua require('comp')
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 
@@ -560,105 +520,3 @@ autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
   autocmd FileChangedShellPost *
     \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
-lua <<EOF
-
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-  return
-end
-
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-  return
-end
-
-require("luasnip/loaders/from_vscode").lazy_load()
-
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
-
--- find more here: https://www.nerdfonts.com/cheat-sheet
-
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body) -- For `luasnip` users.
-    end,
-  },
-  mapping = {
-    ["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<C-j>"] = cmp.mapping.select_next_item(),
-    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ["<C-e>"] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    },
-    -- Accept currently selected item. If none selected, `select` first item.
-    -- Set `select` to `false` to only confirm explicitly selected items.
-    ["<CR>"] = cmp.mapping.confirm { select = true },
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expandable() then
-        luasnip.expand()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif check_backspace() then
-        fallback()
-      else
-        fallback()
-      end
-    end, {
-      "i",
-      "s",
-    }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, {
-      "i",
-      "s",
-    }),
-  },
-  formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-      vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        luasnip = "[Snippet]",
-        buffer = "[Buffer]",
-        path = "[Path]",
-      })[entry.source.name]
-      return vim_item
-    end,
-  },
-  sources = {
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "path" },
-  },
-  confirm_opts = {
-    behavior = cmp.ConfirmBehavior.Replace,
-    select = false,
-  },
-  documentation = {
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-  },
-  experimental = {
-    ghost_text = false,
-    native_menu = false,
-  },
-}
-EOF
