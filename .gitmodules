@@ -130,3 +130,6 @@
 [submodule "pack/plugins/start/lualine"]
 	path = pack/plugins/start/lualine
 	url = https://github.com/nvim-lualine/lualine.nvim
+[submodule "pack/plugins/start/editorconfig-vim"]
+	path = pack/plugins/start/editorconfig-vim
+	url = https://github.com/editorconfig/editorconfig-vim.git

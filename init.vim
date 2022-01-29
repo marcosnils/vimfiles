@@ -65,12 +65,6 @@ set guioptions=egmrLtTb
 set guioptions-=t
 
 
-"" encodings configure
-set fileencoding=utf-8
-set encoding=utf-8
-set fileencodings=utf-8,latin1
-set fileformats=unix,dos,mac
-
 "" Set narrow linespace
 set linespace=0
 
@@ -145,25 +139,6 @@ set sessionoptions=buffers,curdir,folds,help,winpos,winsize,tabpages,unix,slash,
 
 "" Disable code folding
 set nofoldenable
-
-
-"" Define custom indentation for filetypes
-autocmd FileType javascript :setlocal sw=2 ts=2 sts=2
-autocmd FileType less :setlocal sw=2 ts=2 sts=2
-autocmd FileType yaml :setlocal sw=2 ts=2 sts=2
-autocmd FileType typescript :setlocal sw=2 ts=2 sts=2
-autocmd FileType coffee :setlocal sw=2 ts=2 sts=2
-autocmd FileType ruby,eruby :setlocal sw=2 ts=2 sts=2
-autocmd FileType tf :setlocal sw=2 ts=2 sts=2
-autocmd FileType html :setlocal sw=2 ts=2 sts=2
-autocmd FileType json :setlocal sw=2 ts=2 sts=2
-
-
-"" Disable AutoClose plugin on markdown files"
-"let g:AutoCloseProtectedRegions = []
-"autocmd FileType * :AutoCloseOn
-"autocmd FileType markdown :AutoCloseOff
-"autocmd FileType markdown :set spell
 
 " Remember cursor position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
@@ -290,7 +265,7 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-autocmd FileType c,cpp,java,php,ruby,eruby,python,javascript,coffee,jade,sass,less,scss autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType c,cpp,java,php,ruby,eruby,python,javascript,sass autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 """""""""""""""""""""""""""""""""""""""
 """""""""" Plugin Parameters """"""""""
@@ -472,12 +447,8 @@ vnoremap <leader>y "+y"
 nnoremap <leader>g :GundoToggle<CR>
 
 
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dh <Plug>(go-def-split)
-
 set completeopt=menu,menuone,noselect
 set synmaxcol=250
-
 
 " Terraform
 let g:terraform_fmt_on_save=0
@@ -500,16 +471,15 @@ let g:fzf_layout = { 'down': '20%' }
 " Disable quote concealing in JSON files
 let g:vim_json_conceal=0
 
-
 "Lualine
 lua require('lline')
 
-
 "Go
-lua require('go')
+lua require('lsp')
 
 " Completion
 lua require('comp')
+
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 
