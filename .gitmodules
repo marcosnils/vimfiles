@@ -133,3 +133,6 @@
 [submodule "pack/plugins/start/editorconfig-vim"]
 	path = pack/plugins/start/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule "pack/plugins/start/ctrlsf"]
+	path = pack/plugins/start/ctrlsf
+	url = https://github.com/dyng/ctrlsf.vim

@@ -107,7 +107,6 @@ set nojoinspaces
 "" Wrap text
 set showbreak=...
 set linebreak
-"set textwidth=79
 set formatoptions=qrn1
 
 " Display invisible characters.
@@ -447,7 +446,7 @@ vnoremap <leader>y "+y"
 nnoremap <leader>g :GundoToggle<CR>
 
 
-set completeopt=menu,menuone,noselect
+set completeopt=menu,menuone,noselect,noinsert
 set synmaxcol=250
 
 " Terraform
@@ -490,3 +489,9 @@ autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
   autocmd FileChangedShellPost *
     \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
+
+"CtrlSF
+
+let g:ctrlsf_default_view_mode = 'compact'
+nmap <C-F>f <Plug>CtrlSFPrompt
+nmap <C-F>p <Plug>CtrlSFCCwordPath
