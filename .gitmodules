@@ -136,3 +136,6 @@
 [submodule "pack/plugins/start/ctrlsf"]
 	path = pack/plugins/start/ctrlsf
 	url = https://github.com/dyng/ctrlsf.vim
+[submodule "pack/plugins/start/copilot"]
+	path = pack/plugins/start/copilot
+	url = https://github.com/github/copilot.vim.git

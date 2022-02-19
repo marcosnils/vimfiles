@@ -472,13 +472,12 @@ let g:vim_json_conceal=0
 
 "Lualine
 lua require('lline')
-
 "Go
 lua require('lsp')
-
 " Completion
 lua require('comp')
-
+" Completion
+lua require('copilot')
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 
@@ -495,3 +494,6 @@ autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 let g:ctrlsf_default_view_mode = 'compact'
 nmap <C-F>f <Plug>CtrlSFPrompt
 nmap <C-F>p <Plug>CtrlSFCCwordPath
+
+
+"Copilot
