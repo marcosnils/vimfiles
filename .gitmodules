@@ -139,3 +139,6 @@
 [submodule "pack/plugins/start/copilot"]
 	path = pack/plugins/start/copilot
 	url = https://github.com/github/copilot.vim.git
+[submodule "pack/plugins/start/vim-illuminate"]
+	path = pack/plugins/start/vim-illuminate
+	url = https://github.com/RRethy/vim-illuminate

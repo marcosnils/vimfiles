@@ -3,8 +3,7 @@ local nvim_lsp = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-
-
+local illuminate = require('illuminate')
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -12,6 +11,7 @@ local on_attach = function(client, bufnr)
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+  illuminate.on_attach(client, bufnr)
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -28,6 +28,9 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<A-n>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', {noremap=true})
+  buf_set_keymap('n', '<A-p>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', {noremap=true})
+
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
@@ -36,42 +39,83 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "ff", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
 
-  -- Set autocommands conditional on server_capabilities
-if client.resolved_capabilities.document_highlight then
-  vim.api.nvim_exec([[
-    hi LspReferenceRead cterm=bold ctermbg=DarkMagenta guibg=LightYellow
-    hi LspReferenceText cterm=bold ctermbg=DarkMagenta guibg=LightYellow
-    hi LspReferenceWrite cterm=bold ctermbg=DarkMagenta guibg=LightYellow
-    augroup lsp_document_highlight
-      autocmd! * <buffer>
-      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    augroup END
-  ]], false)
-  end
+  if client.resolved_capabilities.document_formatting then
+		vim.cmd([[
+			augroup formatting
+				autocmd! * <buffer>
+				autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
+				autocmd BufWritePre <buffer> lua organizeImports(1000)
+			augroup END
+		]])
+	end
+
+  	-- Set autocommands conditional on server_capabilities
+	if client.resolved_capabilities.document_highlight then
+		vim.cmd([[
+      hi def link LspReferenceRead CursorLine
+      hi def link LspReferenceText CursorLine
+      hi def link LspReferenceWrite CursorLine
+			augroup lsp_document_highlight
+				autocmd! * <buffer>
+				autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+				autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+			augroup END
+		]])
+	end
 end
 
 
-nvim_lsp.jsonls.setup{
+nvim_lsp.jsonls.setup {
   capabilities = capabilities,
-	on_attach = on_attach,
+  on_attach = on_attach,
 }
 
-nvim_lsp.gopls.setup{
-	cmd = {'gopls'},
-	-- for postfix snippets and analyzers
-	capabilities = capabilities,
-	    settings = {
-	      gopls = {
-		      experimentalPostfixCompletions = true,
-		      analyses = {
-		        unusedparams = true,
-		        shadow = true,
-		     },
-		     staticcheck = true,
-		    },
-	    },
-	on_attach = on_attach,
+nvim_lsp.gopls.setup {
+  cmd = {'gopls'},
+  -- for postfix snippets and analyzers
+  capabilities = capabilities,
+      settings = {
+        gopls = {
+          experimentalPostfixCompletions = true,
+          analyses = {
+            unusedparams = true,
+            shadow = true,
+         },
+         staticcheck = true,
+        },
+      },
+  on_attach = on_attach,
 }
+
+nvim_lsp["yamlls"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    yaml = {
+      schemaStore = {
+        url = "https://www.schemastore.org/api/json/catalog.json",
+        enable = true,
+      },
+      schemas = schemas,
+    },
+  },
+})
 
 --vim.lsp.set_log_level("debug")
+--
+-- organize imports
+-- https://github.com/neovim/nvim-lspconfig/issues/115#issuecomment-902680058
+function organizeImports(timeoutms)
+  local params = vim.lsp.util.make_range_params()
+  params.context = { only = { "source.organizeImports" } }
+  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeoutms)
+  for _, res in pairs(result or {}) do
+    for _, r in pairs(res.result or {}) do
+      if r.edit then
+        vim.lsp.util.apply_workspace_edit(r.edit, 'UTF-8')
+      else
+        vim.lsp.buf.execute_command(r.command)
+      end
+    end
+  end
+end
