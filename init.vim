@@ -479,7 +479,6 @@ lua require('comp')
 " Completion
 lua require('copilot')
 
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 
 " trigger `autoread` when files changes on disk
   set autoread

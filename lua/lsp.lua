@@ -70,7 +70,14 @@ nvim_lsp.jsonls.setup {
   on_attach = on_attach,
 }
 
-nvim_lsp["golangci_lint_ls"].setup({})
+
+
+nvim_lsp["golangci_lint_ls"].setup({
+  init_options = {
+    command = { 'golangci-lint', 'run', '--out-format', 'json' },
+  }
+})
+
 
 nvim_lsp.gopls.setup {
   cmd = {'gopls'},
