@@ -91,10 +91,6 @@ colorscheme distinguished
 ""Minimal number of screen lines to keep above and below the cursor.
 set scrolloff=3
 
-"" set tabstop value and shift width
-"set tabstop=4
-set shiftwidth=4
-set softtabstop=4
 set expandtab
 
 ""setting about indent
@@ -491,8 +487,6 @@ lua require('copilot')
 "CtrlSF
 
 let g:ctrlsf_default_view_mode = 'compact'
+let g:ctrlsf_default_root = 'project'
 nmap <C-F>f <Plug>CtrlSFPrompt
 nmap <C-F>p <Plug>CtrlSFCCwordPath
-
-
-"Copilot

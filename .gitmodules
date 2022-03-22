@@ -142,3 +142,6 @@
 [submodule "pack/plugins/start/vim-illuminate"]
 	path = pack/plugins/start/vim-illuminate
 	url = https://github.com/RRethy/vim-illuminate
+[submodule "pack/plugins/start/nvim-lsp-installer"]
+	path = pack/plugins/start/nvim-lsp-installer
+	url = https://github.com/williamboman/nvim-lsp-installer
