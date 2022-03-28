@@ -37,9 +37,6 @@
 [submodule "bundle/vim-addon-mw-utils"]
 	path = pack/plugins/start/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule "bundle/ack"]
-	path = pack/plugins/start/ack
-	url = https://github.com/mileszs/ack.vim.git
 [submodule "bundle/taglist-plus"]
 	path = bundle/taglist-plus
 	url = https://github.com/int3/vim-taglist-plus.git
@@ -55,24 +52,15 @@
 [submodule "bundle/vim-snipmate"]
 	path = bundle/vim-snipmate
 	url = https://github.com/garbas/vim-snipmate.git
-[submodule "bundle/gundo"]
-	path = pack/plugins/start/gundo
-	url = https://github.com/sjl/gundo.vim.git
 [submodule "bundle/vim-haml"]
 	path = pack/plugins/start/vim-haml
 	url = https://github.com/tpope/vim-haml.git
-[submodule "bundle/fountain"]
-	path = pack/plugins/start/fountain
-	url = https://github.com/vim-scripts/fountain.vim.git
 [submodule "bundle/vim-coffee-script"]
 	path = pack/plugins/start/vim-coffee-script
 	url = https://github.com/AndrewRadev/vim-coffee-script.git
 [submodule "bundle/vim-distinguished"]
 	path = pack/plugins/start/vim-distinguished
 	url = https://github.com/Lokaltog/vim-distinguished.git
-[submodule "bundle/vim-snippets"]
-	path = pack/plugins/start/vim-snippets
-	url = https://github.com/honza/vim-snippets.git
 [submodule "bundle/tagbar"]
 	path = pack/plugins/start/tagbar
 	url = git@github.com:majutsushi/tagbar.git
@@ -82,9 +70,6 @@
 [submodule "bundle/coc"]
 	path = pack/plugins/start/coc
 	url = https://github.com/neoclide/coc.nvim.git
-[submodule "bundle/ultisnips"]
-	path = pack/plugins/start/ultisnips
-	url = https://github.com/SirVer/ultisnips.git
 [submodule "pack/plugins/start/indentLint"]
 	path = pack/plugins/start/indentLint
 	url = https://github.com/Yggdroot/indentLine.git
@@ -145,3 +130,9 @@
 [submodule "pack/plugins/start/nvim-lsp-installer"]
 	path = pack/plugins/start/nvim-lsp-installer
 	url = https://github.com/williamboman/nvim-lsp-installer
+[submodule "pack/plugins/start/friendly_snippets"]
+	path = pack/plugins/start/friendly_snippets
+	url = https://github.com/rafamadriz/friendly-snippets
+[submodule "pack/plugins/start/cmp_luasnip"]
+	path = pack/plugins/start/cmp_luasnip
+	url = https://github.com/saadparwaiz1/cmp_luasnip
