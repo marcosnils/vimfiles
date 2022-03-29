@@ -7,9 +7,6 @@
 [submodule "bundle/vim-repeat"]
 	path = pack/plugins/start/vim-repeat
 	url = http://github.com/tpope/vim-repeat.git
-[submodule "bundle/vim-rails"]
-	path = pack/plugins/start/vim-rails
-	url = http://github.com/tpope/vim-rails.git
 [submodule "bundle/vim-fugitive"]
 	path = pack/plugins/start/vim-fugitive
 	url = http://github.com/tpope/vim-fugitive.git
@@ -25,9 +22,6 @@
 [submodule "bundle/nerdcommenter"]
 	path = pack/plugins/start/nerdcommenter
 	url = http://github.com/scrooloose/nerdcommenter.git
-[submodule "bundle/vim-ruby"]
-	path = pack/plugins/start/vim-ruby
-	url = https://github.com/vim-ruby/vim-ruby.git
 [submodule "bundle/vim-ragtag"]
 	path = pack/plugins/start/vim-ragtag
 	url = https://github.com/tpope/vim-ragtag.git
@@ -52,12 +46,6 @@
 [submodule "bundle/vim-snipmate"]
 	path = bundle/vim-snipmate
 	url = https://github.com/garbas/vim-snipmate.git
-[submodule "bundle/vim-haml"]
-	path = pack/plugins/start/vim-haml
-	url = https://github.com/tpope/vim-haml.git
-[submodule "bundle/vim-coffee-script"]
-	path = pack/plugins/start/vim-coffee-script
-	url = https://github.com/AndrewRadev/vim-coffee-script.git
 [submodule "bundle/vim-distinguished"]
 	path = pack/plugins/start/vim-distinguished
 	url = https://github.com/Lokaltog/vim-distinguished.git
