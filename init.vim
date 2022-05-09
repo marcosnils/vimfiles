@@ -268,7 +268,7 @@ autocmd FileType c,cpp,java,php,ruby,eruby,python,javascript,sass autocmd BufWri
 
 "" NERDTree Parameters
 "" Quit on opening files from the tree
-let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen=0
 
 " Highlight the selected entry in the tree
 let NERDTreeHighlightCursorline=1
@@ -367,7 +367,7 @@ imap <silent> <F6> <C-O>:set nolist!<CR>
 
 
 "" Closes buffer
-nmap <C-x> :bdelete<CR>
+nmap <C-x> :Bclose<CR>
 
 "" Remaps Shift + v to select line without newline char in visual mode
 nnoremap <leader>v 0vg_
