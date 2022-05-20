@@ -488,5 +488,8 @@ lua require('copilot')
 
 let g:ctrlsf_default_view_mode = 'compact'
 let g:ctrlsf_default_root = 'project'
+let g:ctrlsf_auto_focus = {
+    \ "at": "start"
+\ }
 nmap <C-F>f <Plug>CtrlSFPrompt
 nmap <C-F>p <Plug>CtrlSFCCwordPath
