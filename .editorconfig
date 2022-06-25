@@ -1,5 +1,8 @@
 # EditorConfig is awesome: http://EditorConfig.org
 
+# This file needs to be copied to the user home directory
+# for editorconfig to load it
+
 # top-most EditorConfig file
 root = true
 
@@ -14,4 +17,5 @@ trim_trailing_whitespace = true
 
 [*.{rb,yaml,yml,lua,js,ts,rb,tf,html,json,graphql,graphqls}]
 indent_style = space
+trim_trailing_whitespace = true
 indent_size = 2

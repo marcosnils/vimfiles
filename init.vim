@@ -252,16 +252,6 @@ augroup END
 set updatetime=500
 
 
-"" Clear trailing whitespaces on save for some filetypes
-fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfun
-
-autocmd FileType c,cpp,java,php,ruby,eruby,python,javascript,sass,html autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-
 """""""""""""""""""""""""""""""""""""""
 """""""""" Plugin Parameters """"""""""
 """""""""""""""""""""""""""""""""""""""
