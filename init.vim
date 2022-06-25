@@ -142,7 +142,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 au VimResized * exe "normal! \<c-w>="
 
 " Status line
-set laststatus=2
+set laststatus=3
 
 
 """""""""""""""""""""""""""""""""""""""
@@ -474,6 +474,9 @@ lua require('lsp')
 lua require('comp')
 " Completion
 lua require('copilot')
+
+" Cue TS
+lua require('treesitter')
 
 
 " trigger `autoread` when files changes on disk

@@ -103,9 +103,6 @@
 [submodule "pack/plugins/start/lualine"]
 	path = pack/plugins/start/lualine
 	url = https://github.com/nvim-lualine/lualine.nvim
-[submodule "pack/plugins/start/editorconfig-vim"]
-	path = pack/plugins/start/editorconfig-vim
-	url = https://github.com/editorconfig/editorconfig-vim.git
 [submodule "pack/plugins/start/ctrlsf"]
 	path = pack/plugins/start/ctrlsf
 	url = https://github.com/dyng/ctrlsf.vim
@@ -124,3 +121,6 @@
 [submodule "pack/plugins/start/cmp_luasnip"]
 	path = pack/plugins/start/cmp_luasnip
 	url = https://github.com/saadparwaiz1/cmp_luasnip
+[submodule "pack/plugins/start/nvim-treesitter"]
+	path = pack/plugins/start/nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter

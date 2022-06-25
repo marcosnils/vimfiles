@@ -12,6 +12,6 @@ indent_style = tab
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{rb,yaml,yml,lua,js,ts,rb,tf,html,json}]
+[*.{rb,yaml,yml,lua,js,ts,rb,tf,html,json,graphql,graphqls}]
 indent_style = space
 indent_size = 2
