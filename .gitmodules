@@ -55,9 +55,6 @@
 [submodule "bundle/coc"]
 	path = pack/plugins/start/coc
 	url = https://github.com/neoclide/coc.nvim.git
-[submodule "pack/plugins/start/indentLint"]
-	path = pack/plugins/start/indentLint
-	url = https://github.com/Yggdroot/indentLine.git
 [submodule "pack/plugins/start/vim-terraform"]
 	path = pack/plugins/start/vim-terraform
 	url = https://github.com/hashivim/vim-terraform.git
