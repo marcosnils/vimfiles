@@ -457,7 +457,7 @@ let g:fzf_layout = { 'down': '20%' }
 let g:vim_json_conceal=0
 
 "Lualine
-lua require('lline')
+lua require('init')
 "Go
 lua require('lsp')
 " Completion

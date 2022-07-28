@@ -106,9 +106,6 @@
 [submodule "pack/plugins/start/vim-illuminate"]
 	path = pack/plugins/start/vim-illuminate
 	url = https://github.com/RRethy/vim-illuminate
-[submodule "pack/plugins/start/nvim-lsp-installer"]
-	path = pack/plugins/start/nvim-lsp-installer
-	url = https://github.com/williamboman/nvim-lsp-installer
 [submodule "pack/plugins/start/friendly_snippets"]
 	path = pack/plugins/start/friendly_snippets
 	url = https://github.com/rafamadriz/friendly-snippets
@@ -121,3 +118,6 @@
 [submodule "pack/plugins/start/editorconfig_vim"]
 	path = pack/plugins/start/editorconfig_vim
 	url = https://github.com/gpanders/editorconfig.nvim
+[submodule "pack/plugins/start/indent-blankline"]
+	path = pack/plugins/start/indent-blankline
+	url = https://github.com/lukas-reineke/indent-blankline.nvim.git

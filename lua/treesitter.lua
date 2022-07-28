@@ -16,15 +16,35 @@ parser_config.cue = {
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = "all",
+  ensure_installed = {
+		"bash",
+		"css",
+		"dockerfile",
+		"fish",
+		"go",
+		"gomod",
+		"gowork",
+		"hcl",
+		"html",
+		"javascript",
+    "cue",
+		"lua",
+		"make",
+		"markdown",
+		"markdown_inline",
+		"rust",
+		"scss",
+		"toml",
+		"json",
+		"vim",
+		"yaml",
+	},
 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+  auto_install = true,
 
   highlight = {
 		enable = true,
 		disable = {},
-		additional_vim_regex_highlighting = true,
 	},
   indent = {
 		enable = false,

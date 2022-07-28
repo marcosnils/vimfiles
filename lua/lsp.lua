@@ -1,4 +1,3 @@
-local installer = require('nvim-lsp-installer')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -109,10 +108,6 @@ nvim_lsp["yamlls"] = {
   },
 }
 
-installer.on_server_ready(function(server)
-  server:setup(nvim_lsp[server.name] or {})
-end)
-
 --vim.lsp.set_log_level("debug")
 --
 -- organize imports
@@ -132,3 +127,6 @@ function organizeImports(timeoutms)
   end
 end
 
+require'lspconfig'.dagger.setup{
+  on_attach = on_attach,
+}
