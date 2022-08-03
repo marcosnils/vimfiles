@@ -66,17 +66,22 @@ local on_attach = function(client, bufnr)
 	end
 end
 
-local nvim_lsp = {}
+local lspconfig = require('lspconfig')
 
-nvim_lsp["jsonls"] = {
+lspconfig.dagger.setup{
+  on_attach = on_attach,
+}
+
+
+lspconfig.jsonls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
 
 
+lspconfig.golangci_lint_ls.setup {}
 
-
-nvim_lsp["gopls"] = {
+lspconfig.gopls.setup {
   cmd = {'gopls'},
   -- for postfix snippets and analyzers
   capabilities = capabilities,
@@ -94,7 +99,7 @@ nvim_lsp["gopls"] = {
   on_attach = on_attach,
 }
 
-nvim_lsp["yamlls"] = {
+lspconfig.yamlls.setup = {
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
@@ -127,6 +132,3 @@ function organizeImports(timeoutms)
   end
 end
 
-require'lspconfig'.dagger.setup{
-  on_attach = on_attach,
-}

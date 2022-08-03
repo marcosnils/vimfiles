@@ -40,3 +40,8 @@ require('lualine').setup{
   },
   extensions = {}
 }
+
+require('mason').setup()
+require('mason-lspconfig').setup({
+   ensure_installed = { "gopls", "golangci_lint_ls" }
+})
