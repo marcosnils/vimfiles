@@ -58,9 +58,6 @@
 [submodule "pack/plugins/start/vim-terraform"]
 	path = pack/plugins/start/vim-terraform
 	url = https://github.com/hashivim/vim-terraform.git
-[submodule "pack/plugins/start/vim-base64.vim"]
-	path = pack/plugins/start/vim-base64.vim
-	url = https://github.com/christianrondeau/vim-base64.git
 [submodule "pack/plugins/start/rust.vim"]
 	path = pack/plugins/start/rust.vim
 	url = https://github.com/rust-lang/rust.vim
@@ -127,3 +124,12 @@
 [submodule "pack/plugins/start/mason-lspconfig"]
 	path = pack/plugins/start/mason-lspconfig
 	url = https://github.com/williamboman/mason-lspconfig.nvim
+[submodule "pack/plugins/start/nvim-ts-autotag"]
+	path = pack/plugins/start/nvim-ts-autotag
+	url = https://github.com/windwp/nvim-ts-autotag
+[submodule "pack/plugins/start/cmp-nvim-lsp-signature-help"]
+	path = pack/plugins/start/cmp-nvim-lsp-signature-help
+	url = git@github.com:hrsh7th/cmp-nvim-lsp-signature-help.git
+[submodule "pack/plugins/start/nvim-base16"]
+	path = pack/plugins/start/nvim-base16
+	url = git@github.com:RRethy/nvim-base16.git
