@@ -428,10 +428,6 @@ vnoremap <leader>y "+y"
 
 
 
-" Map \g to Gundo
-nnoremap <leader>g :GundoToggle<CR>
-
-
 set completeopt=menu,menuone,noselect,noinsert
 set synmaxcol=250
 
@@ -457,16 +453,15 @@ let g:fzf_layout = { 'down': '20%' }
 let g:vim_json_conceal=0
 
 "Lualine
-lua require('init')
+lua require('user.init')
 "Go
-lua require('lsp')
+lua require('user.lsp')
 " Completion
-lua require('comp')
+lua require('user.comp')
 " Completion
-lua require('copilot')
-
+lua require('user.copilot')
 " Cue TS
-lua require('treesitter')
+lua require('user.treesitter')
 
 
 " trigger `autoread` when files changes on disk
