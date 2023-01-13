@@ -42,6 +42,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set('n', '<A-n>', function () require"illuminate".next_reference{wrap=true} end, bufopts)
+  vim.keymap.set('n', '<A-p>', function () require"illuminate".next_reference{wrap=true, reverse=true} end, bufopts)
 
   --buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   --buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -93,13 +95,33 @@ lspconfig.jsonls.setup {
   on_attach = on_attach,
 }
 
+lspconfig.yamlls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+lspconfig.graphql.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
 
 lspconfig.golangci_lint_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
 
+lspconfig.pylsp.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 lspconfig.tsserver.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+
+lspconfig.rust_analyzer.setup{
   capabilities = capabilities,
   on_attach = on_attach,
 }
