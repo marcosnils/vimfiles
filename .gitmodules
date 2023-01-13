@@ -130,3 +130,6 @@
 [submodule "pack/plugins/start/nvim-base16"]
 	path = pack/plugins/start/nvim-base16
 	url = git@github.com:RRethy/nvim-base16.git
+[submodule "pack/plugins/start/nvim-treesitter-textobjects"]
+	path = pack/plugins/start/nvim-treesitter-textobjects
+	url = https://github.com/nvim-treesitter/nvim-treesitter-textobjects
