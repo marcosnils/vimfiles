@@ -1,10 +1,9 @@
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local illuminate = require('illuminate')
 
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -18,15 +17,15 @@ local on_attach = function(client, bufnr)
   illuminate.on_attach(client, bufnr)
 
   -- Enable completion triggered by <c-x><c-o>
-	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
 
   -- Mappings.
-  local opts = { noremap=true, silent=true, buffer=bufnr }
+  local opts = { noremap = true, silent = true, buffer = bufnr }
 
-    -- Mappings.
+  -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -42,8 +41,9 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-  vim.keymap.set('n', '<A-n>', function () require"illuminate".next_reference{wrap=true} end, bufopts)
-  vim.keymap.set('n', '<A-p>', function () require"illuminate".next_reference{wrap=true, reverse=true} end, bufopts)
+  vim.keymap.set('n', '<A-n>', function() require "illuminate".next_reference { wrap = true } end, bufopts)
+  vim.keymap.set('n', '<A-p>', function() require "illuminate".next_reference { wrap = true, reverse = true } end,
+    bufopts)
 
   --buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   --buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -58,18 +58,18 @@ local on_attach = function(client, bufnr)
 
 
   if client.server_capabilities.documentFormattingProvider then
-		vim.cmd([[
+    vim.cmd([[
 			augroup formatting
 				autocmd! * <buffer>
 				autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
 				autocmd BufWritePre *.go :silent! lua organizeImports(500)
 			augroup END
 		]])
-	end
+  end
 
-  	-- Set autocommands conditional on server_capabilities
-	if client.server_capabilities.documentHighlightProvider then
-		vim.cmd([[
+  -- Set autocommands conditional on server_capabilities
+  if client.server_capabilities.documentHighlightProvider then
+    vim.cmd([[
       hi def link LspReferenceRead CursorLine
       hi def link LspReferenceText CursorLine
       hi def link LspReferenceWrite CursorLine
@@ -79,12 +79,12 @@ local on_attach = function(client, bufnr)
 				autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 			augroup END
 		]])
-	end
+  end
 end
 
 local lspconfig = require('lspconfig')
 
-lspconfig.dagger.setup{
+lspconfig.dagger.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
@@ -115,38 +115,45 @@ lspconfig.pylsp.setup {
   on_attach = on_attach,
 }
 
-lspconfig.tsserver.setup{
+lspconfig.tsserver.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
 
 
-lspconfig.rust_analyzer.setup{
+lspconfig.phpactor.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
 
 
-lspconfig.sumneko_lua.setup{
+
+lspconfig.rust_analyzer.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+
+lspconfig.lua_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
 
 lspconfig.gopls.setup {
-  cmd = {'gopls'},
+  cmd = { 'gopls' },
   -- for postfix snippets and analyzers
   capabilities = capabilities,
-      settings = {
-        gopls = {
-          experimentalPostfixCompletions = true,
-          gofumpt = true,
-          analyses = {
-            unusedparams = true,
-            shadow = true,
-         },
-         staticcheck = true,
-        },
+  settings = {
+    gopls = {
+      experimentalPostfixCompletions = true,
+      gofumpt = true,
+      analyses = {
+        unusedparams = true,
+        shadow = true,
       },
+      staticcheck = true,
+    },
+  },
   on_attach = on_attach,
 }
 
@@ -182,4 +189,3 @@ function organizeImports(timeoutms)
     end
   end
 end
-
