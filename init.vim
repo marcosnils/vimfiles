@@ -18,13 +18,6 @@ set colorcolumn=80
 " set English language
 set langmenu=none
 
-" Use english for spellchecking, but don't spellcheck by default
-if version >= 700
-    set spl=en spell
-    set nospell
-endif
-
-
 " Better modes.  Remeber where we are, support yankring
 set viminfo=!,'100,\"100,:20,<50,s10,h,n~/.viminfo
 
@@ -145,50 +138,6 @@ au VimResized * exe "normal! \<c-w>="
 set laststatus=3
 
 
-"""""""""""""""""""""""""""""""""""""""
-"""""""""""""  Functions  """""""""""""
-"""""""""""""""""""""""""""""""""""""""
-
-" Creates a session
-function! MakeSession()
-    let b:sessiondir = $HOME
-    let b:sessionfile = b:sessiondir . '/.session.vim'
-    exe "mksession! " . b:sessionfile
-
-endfunction
-
-" Updates a session, BUT ONLY IF IT ALREADY EXISTS
-function! UpdateSession()
-    if argc()==0
-        let b:sessiondir = $HOME
-        let b:sessionfile = b:sessiondir . "/.session.vim"
-        "if !(filereadable(b:sessionfile))
-        ":call MakeSession()
-        "endif
-        exe "mksession! " . b:sessionfile
-        echo "updating session"
-    endif
-endfunction
-
-" Loads a session if it exists
-function! LoadSession()
-    if argc() == 0
-        let b:sessiondir = $HOME
-        let b:sessionfile = b:sessiondir . "/.session.vim"
-        if (filereadable(b:sessionfile))
-            exe 'source ' b:sessionfile
-        else
-            echo "No session loaded."
-        endif
-    else
-        let b:sessionfile = ""
-        let b:sessiondir = ""
-    endif
-endfunction
-
-au VimEnter * :call LoadSession()
-au VimLeave * :call UpdateSession()
-
 "<home> toggles between start of line and start of text
 imap <khome> <home>
 nmap <khome> <home>
@@ -204,29 +153,6 @@ function! Home()
 endfunction
 
 
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-set diffexpr=MyDiff()
-function! MyDiff()
-    let opt = '-a --binary '
-    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-    let arg1 = v:fname_in
-    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-    let arg2 = v:fname_new
-    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-    let arg3 = v:fname_out
-    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-    let eq = ''
-    let cmd = 'diff'
-    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
-
-if !exists(":DiffOrig")
-    command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-                \ | wincmd p | diffthis
-endif
 
 
 "" Word count functions
@@ -286,28 +212,6 @@ au BufNewFile,BufReadPost *.js let g:ackprg="ack --ignore-dir=node_modules -H --
 """""""""""" Key Mappings """"""""""""
 """"""""""""""""""""""""""""""""""""""
 
-"" These mappings override any mapping made by plugins and are called after
-"" all plugins. Be careful.
-function! AfterMappings()
-
-    " These mappings are used when set selectmode=mouse,key,cmd (Select Mode).
-    nnoremap <C-Left> b
-    vnoremap <C-S-Left> b
-    nnoremap <C-S-Left> gh<C-O>b
-    inoremap <C-S-Left> <C-\><C-O>gh<C-O>b
-
-    vnoremap <C-S-Right> w
-    nnoremap <C-Right> w
-    nnoremap <C-S-Right> gh<C-O>w
-    inoremap <C-S-Right> <C-\><C-O>gh<C-O>w
-
-    " Map NERDComment toggle to work on select-mode
-    vmap <leader>c<space> :call NERDComment(1, 'toggle')<CR>
-
-endfunction
-"" Call mapping function
-au VimEnter * :call AfterMappings()
-
 "" Fast find selected text
 map , y/<C-R>"/<cr>
 
@@ -357,7 +261,7 @@ imap <silent> <F6> <C-O>:set nolist!<CR>
 
 
 "" Closes buffer
-nmap <C-x> :Bclose<CR>
+nmap <C-x> :bdelete<CR>
 
 "" Remaps Shift + v to select line without newline char in visual mode
 nnoremap <leader>v 0vg_
@@ -452,16 +356,8 @@ let g:fzf_layout = { 'down': '20%' }
 " Disable quote concealing in JSON files
 let g:vim_json_conceal=0
 
-"Lualine
+"Init lua
 lua require('user.init')
-"Go
-lua require('user.lsp')
-" Completion
-lua require('user.comp')
-" Completion
-lua require('user.copilot')
-" Cue TS
-lua require('user.treesitter')
 
 
 " trigger `autoread` when files changes on disk
@@ -482,4 +378,3 @@ let g:ctrlsf_auto_focus = {
 
 nmap <C-F>f <Plug>CtrlSFPrompt
 nmap <C-F>p <Plug>CtrlSFCCwordPath
-

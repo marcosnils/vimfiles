@@ -1,20 +1,24 @@
-require("indent_blankline").setup {
-    show_current_context = true,
-    show_current_context_start = true,
-}
+require('user.lsp')
+require('user.comp')
+require('user.copilot')
+require('user.treesitter')
 
-require('lualine').setup{
+
+require("ibl").setup()
+
+
+require('lualine').setup {
   options = {
     icons_enabled = false,
     theme = 'iceberg_dark',
-    component_separators = { left = '|', right = '|'},
-    section_separators = { left = '|', right = '|'},
+    component_separators = { left = '|', right = '|' },
+    section_separators = { left = '|', right = '|' },
     disabled_filetypes = {},
     always_divide_middle = true,
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
     lualine_c = {
       {
         "filename",
@@ -22,27 +26,28 @@ require('lualine').setup{
         path = 1,
       },
     },
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {}
   },
   tabline = {
-    lualine_a = {'buffers'},
-    lualine_z = {'tabs'}
+    lualine_a = { 'buffers' },
+    lualine_z = { 'tabs' }
   },
   extensions = {}
 }
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-   ensure_installed = { "gopls", "golangci_lint_ls" }
+  ensure_installed = { "gopls", "golangci_lint_ls" }
 })
 
+require "gitlinker".setup()

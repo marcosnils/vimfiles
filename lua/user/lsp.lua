@@ -28,6 +28,10 @@ local on_attach = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', '<leader>dv', function()
+    vim.cmd('vsplit')
+    vim.lsp.buf.definition()
+  end, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
@@ -56,16 +60,14 @@ local on_attach = function(client, bufnr)
   --buf_set_keymap('n', '<A-n>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', {noremap=true})
   --buf_set_keymap('n', '<A-p>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', {noremap=true})
 
-
-  if client.server_capabilities.documentFormattingProvider then
-    vim.cmd([[
-			augroup formatting
-				autocmd! * <buffer>
-				autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
-				autocmd BufWritePre *.go :silent! lua organizeImports(500)
-			augroup END
-		]])
+  if client.server_capabilities.codeActionProvider and client.name ~= "lua_ls" then
+    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+      callback = function()
+        organizeImports(1500)
+      end,
+    })
   end
+
 
   -- Set autocommands conditional on server_capabilities
   if client.server_capabilities.documentHighlightProvider then
@@ -82,6 +84,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
+
 local lspconfig = require('lspconfig')
 
 lspconfig.dagger.setup {
@@ -95,10 +98,6 @@ lspconfig.jsonls.setup {
   on_attach = on_attach,
 }
 
-lspconfig.yamlls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
 
 lspconfig.graphql.setup {
   capabilities = capabilities,
@@ -110,7 +109,7 @@ lspconfig.golangci_lint_ls.setup {
   on_attach = on_attach,
 }
 
-lspconfig.pylsp.setup {
+lspconfig.pyright.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
@@ -127,6 +126,10 @@ lspconfig.phpactor.setup {
 }
 
 
+lspconfig.eslint.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
 
 lspconfig.rust_analyzer.setup {
   capabilities = capabilities,
@@ -138,6 +141,7 @@ lspconfig.lua_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
+
 
 lspconfig.gopls.setup {
   cmd = { 'gopls' },
@@ -157,11 +161,12 @@ lspconfig.gopls.setup {
   on_attach = on_attach,
 }
 
-lspconfig.yamlls.setup = {
+lspconfig.yamlls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
     yaml = {
+      keyOrdering = false,
       schemaStore = {
         url = "https://www.schemastore.org/api/json/catalog.json",
         enable = true,

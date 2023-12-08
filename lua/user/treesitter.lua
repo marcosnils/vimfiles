@@ -67,7 +67,7 @@ require 'nvim-treesitter.configs'.setup {
 }
 
 -- disables json conceal in treesitter
-require("vim.treesitter.query").set_query("json", "highlights", [[
+vim.treesitter.query.set("json", "highlights", [[
 (true) @boolean
 (false) @boolean
 (null) @constant.builtin

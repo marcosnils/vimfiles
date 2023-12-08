@@ -27,7 +27,7 @@ cmp.setup {
     documentation = cmp.config.window.bordered(),
   },
   mapping = {
-    ['<C-b>'] = cmp.mapping.scroll_docs( -4),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ["<Up>"] = cmp.mapping.select_prev_item(),
     ["<Down>"] = cmp.mapping.select_next_item(),
@@ -59,8 +59,8 @@ cmp.setup {
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable( -1) then
-        luasnip.jump( -1)
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
@@ -74,11 +74,11 @@ cmp.setup {
     format = function(entry, vim_item)
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       vim_item.menu = ({
-            nvim_lsp = "[LSP]",
-            luasnip = "[Snippet]",
-            buffer = "[Buffer]",
-            path = "[Path]",
-          })[entry.source.name]
+        nvim_lsp = "[LSP]",
+        luasnip = "[Snippet]",
+        buffer = "[Buffer]",
+        path = "[Path]",
+      })[entry.source.name]
       return vim_item
     end,
   },
@@ -86,7 +86,8 @@ cmp.setup {
     { name = "nvim_lsp_signature_help" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
-    { name = "buffer",
+    {
+      name = "buffer",
       option = {
         get_bufnrs = function()
           return vim.api.nvim_list_bufs()
