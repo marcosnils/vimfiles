@@ -2,7 +2,7 @@ local conform = require("conform")
 conform.setup({
   formatters_by_ft = {
     css = { "prettier" },
-    go = { "gofumpt", "injected" },
+    go = { "gofumpt", "gofmt", "injected" },
     html = { "prettier", "injected" },
     javascript = { "prettier" },
     typescript = { "prettier" },
@@ -14,7 +14,6 @@ conform.setup({
     sh = { "shfmt" },
     sql = { "pg_format", "sql_formatter" },
     tf = { "terraform_fmt" },
-    yaml = { "prettier" },
     zig = { "zigfmt" },
     ["_"] = { "trim_whitespace" },
   },
@@ -25,4 +24,3 @@ conform.setup({
 })
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-

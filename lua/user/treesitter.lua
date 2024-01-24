@@ -25,6 +25,7 @@ require 'nvim-treesitter.configs'.setup {
     "go",
     "gomod",
     "gowork",
+    "graphql",
     "hcl",
     "html",
     "javascript",

@@ -2,6 +2,7 @@ require('user.lsp')
 require('user.comp')
 require('user.copilot')
 require('user.treesitter')
+require('user.conform')
 
 
 require("ibl").setup()
