@@ -106,9 +106,6 @@
 [submodule "pack/plugins/start/nvim-treesitter"]
 	path = pack/plugins/start/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter
-[submodule "pack/plugins/start/editorconfig_vim"]
-	path = pack/plugins/start/editorconfig_vim
-	url = https://github.com/gpanders/editorconfig.nvim
 [submodule "pack/plugins/start/indent-blankline"]
 	path = pack/plugins/start/indent-blankline
 	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
