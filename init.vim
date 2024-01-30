@@ -200,13 +200,6 @@ let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
 
-" Jekyll
-let g:jekyll_post_suffix = "md"
-
-
-"" Ack configuration
-au BufNewFile,BufReadPost *.js let g:ackprg="ack --ignore-dir=node_modules -H --nocolor --nogroup --column"
-
 
 """"""""""""""""""""""""""""""""""""""
 """""""""""" Key Mappings """"""""""""

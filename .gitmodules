@@ -34,9 +34,6 @@
 [submodule "bundle/vim-less"]
 	path = pack/plugins/start/vim-less
 	url = https://github.com/groenewege/vim-less.git
-[submodule "bundle/jekyll"]
-	path = pack/plugins/start/jekyll
-	url = https://github.com/csexton/jekyll.vim.git
 [submodule "bundle/vim-snipmate"]
 	path = bundle/vim-snipmate
 	url = https://github.com/garbas/vim-snipmate.git
