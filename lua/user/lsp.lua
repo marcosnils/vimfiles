@@ -62,6 +62,8 @@ local on_attach = function(client, bufnr)
 
   if client.server_capabilities.codeActionProvider and client.name ~= "lua_ls" then
     vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+      pattern = "*.go",
+      group = vim.api.nvim_create_augroup("LspGolangOrganizeImports." .. bufnr, {}),
       callback = function()
         organizeImports(500)
       end,

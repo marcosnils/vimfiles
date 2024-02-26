@@ -3,6 +3,7 @@ require('user.comp')
 require('user.copilot')
 require('user.treesitter')
 require('user.conform')
+require('user.undotree')
 
 
 require("ibl").setup()

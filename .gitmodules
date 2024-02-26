@@ -136,3 +136,6 @@
 [submodule "pack/plugins/start/conform.vim"]
 	path = pack/plugins/start/conform.vim
 	url = https://github.com/stevearc/conform.nvim.git
+[submodule "pack/plugins/start/undotree"]
+	path = pack/plugins/start/undotree
+	url = https://github.com/mbbill/undotree

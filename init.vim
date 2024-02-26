@@ -211,15 +211,6 @@ map , y/<C-R>"/<cr>
 "" Inserts hard tab in INSERT mode
 inoremap <leader><Tab> <C-V><Tab>
 
-"" Make enter useful in normal & visual mode (match tags and brackets)
-nmap <C-CR> %
-vmap <C-CR> %
-
-"" Strip all trailing whitespace in the current file
-nnoremap <silent> <leader>W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-"" Do the same to all open buffers
-nnoremap <silent> <leader>WW :bufdo let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-
 
 "" Edits vimrc file
 map <leader>e :e $HOME/.config/nvim/init.vim<CR>
@@ -232,7 +223,7 @@ nmap <C-N> :enew<CR>
 nnoremap <leader><tab> <C-W>w
 
 "" Cycles between buffers
-map <silent> <C-tab> :buffer #<CR>
+map <silent> <C-i> :buffer #<CR>
 
 "" Toggles NERDTree
 imap <silent> <F1> <esc>:NERDTreeFind<CR>
@@ -252,9 +243,8 @@ imap <F5> <C-O>:set nowrap!<CR>
 map <silent> <F6> :set nolist!<CR>
 imap <silent> <F6> <C-O>:set nolist!<CR>
 
-
 "" Closes buffer
-nmap <C-x> :bdelete<CR>
+nmap <C-x> :bwipeout<CR>
 
 "" Remaps Shift + v to select line without newline char in visual mode
 nnoremap <leader>v 0vg_
