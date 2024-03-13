@@ -32,7 +32,7 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ["<Up>"] = cmp.mapping.select_prev_item(),
     ["<Down>"] = cmp.mapping.select_next_item(),
-    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<CR>"] = cmp.mapping.confirm { select = true },
     --["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     --["<C-e>"] = cmp.mapping {
     --i = cmp.mapping.abort(),
@@ -96,13 +96,8 @@ cmp.setup {
     },
     { name = "path" },
   },
-  confirm_opts = {
-    behavior = cmp.ConfirmBehavior.Replace,
-    ["<CR>"] = cmp.mapping.confirm { select = true },
-    select = false,
-  },
-  experimental = {
-    ghost_text = false,
-    native_menu = false,
-  },
+  --experimental = {
+  --ghost_text = false,
+  --native_menu = false,
+  --},
 }

@@ -361,3 +361,6 @@ let g:ctrlsf_auto_focus = {
 
 nmap <C-F>f <Plug>CtrlSFPrompt
 nmap <C-F>p <Plug>CtrlSFCCwordPath
+
+nnoremap <silent> <C-w>- :exe "resize " . (winheight(0) * 3/4)<CR>
+nnoremap <silent> <C-w>+ :exe "resize " . (winheight(0) * 10/9)<CR>
