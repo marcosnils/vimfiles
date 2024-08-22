@@ -55,9 +55,6 @@
 [submodule "pack/plugins/start/rust.vim"]
 	path = pack/plugins/start/rust.vim
 	url = https://github.com/rust-lang/rust.vim
-[submodule "pack/plugins/start/fzf"]
-	path = pack/plugins/start/fzf
-	url = https://github.com/junegunn/fzf.git
 [submodule "pack/plugins/start/typescript-vim"]
 	path = pack/plugins/start/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim.git
@@ -85,9 +82,6 @@
 [submodule "pack/plugins/start/lualine"]
 	path = pack/plugins/start/lualine
 	url = https://github.com/nvim-lualine/lualine.nvim
-[submodule "pack/plugins/start/ctrlsf"]
-	path = pack/plugins/start/ctrlsf
-	url = https://github.com/dyng/ctrlsf.vim
 [submodule "pack/plugins/start/copilot"]
 	path = pack/plugins/start/copilot
 	url = https://github.com/github/copilot.vim.git
@@ -136,3 +130,12 @@
 [submodule "pack/plugins/start/undotree"]
 	path = pack/plugins/start/undotree
 	url = https://github.com/mbbill/undotree
+[submodule "pack/plugins/start/gitlinker"]
+	path = pack/plugins/start/gitlinker
+	url = https://github.com/linrongbin16/gitlinker.nvim
+[submodule "pack/plugins/start/telescope"]
+	path = pack/plugins/start/telescope
+	url = git@github.com:nvim-telescope/telescope.nvim.git
+[submodule "pack/plugins/start/gitsigns"]
+	path = pack/plugins/start/gitsigns
+	url = https://github.com/lewis6991/gitsigns.nvim.git

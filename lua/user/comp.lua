@@ -30,6 +30,7 @@ cmp.setup {
   mapping = {
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete({}),
     ["<Up>"] = cmp.mapping.select_prev_item(),
     ["<Down>"] = cmp.mapping.select_next_item(),
     ["<CR>"] = cmp.mapping.confirm { select = true },

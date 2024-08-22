@@ -1,9 +1,12 @@
 require('user.lsp')
+
 require('user.comp')
 require('user.copilot')
 require('user.treesitter')
 require('user.conform')
 require('user.undotree')
+require('user.telescope')
+require("gitsigns").setup()
 
 
 require("ibl").setup()
@@ -53,3 +56,18 @@ require('mason-lspconfig').setup({
 })
 
 require "gitlinker".setup()
+
+vim.keymap.set(
+  { "n", 'v' },
+  "<leader>gy",
+  require("gitlinker").link,
+  { silent = true, noremap = true, desc = "GitLink" }
+)
+vim.keymap.set(
+  { "n", 'v' },
+  "<leader>gY",
+  function()
+    require("gitlinker").link({ action = require("gitlinker.actions").system })
+  end,
+  { silent = true, noremap = true, desc = "GitLink!" }
+)

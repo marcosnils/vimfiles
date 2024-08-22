@@ -46,7 +46,7 @@ vnoremap / /\v
 set gdefault
 
 "" Automatically change working dir to current buffer
-set autochdir
+"set autochdir
 
 "" Disable bell
 set vb
@@ -244,7 +244,7 @@ map <silent> <F6> :set nolist!<CR>
 imap <silent> <F6> <C-O>:set nolist!<CR>
 
 "" Closes buffer
-nmap <C-x> :bwipeout<CR>
+nmap <C-x> :bdelete<CR>
 
 "" Remaps Shift + v to select line without newline char in visual mode
 nnoremap <leader>v 0vg_
@@ -286,8 +286,7 @@ nnoremap <silent> <Down> gj
 inoremap <silent> <C-Up> <C-O>gk
 inoremap <silent> <C-Down> <C-O>gj
 
-"" Inserts file name without extension into text
-inoremap \fn <C-R>=expand("%:t:r")<CR>
+
 
 "" Changes line filetype endings
 map <leader>fu :set ff=unix<CR>
@@ -321,20 +320,6 @@ set synmaxcol=250
 " Terraform
 let g:terraform_fmt_on_save=0
 
-function! s:fzf_root()
-    let dir = trim(system("git rev-parse --show-toplevel 2> /dev/null"))
-    echom dir
-    if !empty(dir)
-      execute 'FZF' dir
-      return
-    endif
-  FZF
-endfunction
-
-" FZF
-nmap <C-P> :call <SID>fzf_root() <CR>
-let g:fzf_layout = { 'down': '20%' }
-
 
 " Disable quote concealing in JSON files
 let g:vim_json_conceal=0
@@ -351,16 +336,7 @@ lua require('user.init')
     \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 
-"CtrlSF
-
-let g:ctrlsf_default_view_mode = 'compact'
-let g:ctrlsf_default_root = 'project'
-let g:ctrlsf_auto_focus = {
-    \ "at": "start"
-\ }
-
-nmap <C-F>f <Plug>CtrlSFPrompt
-nmap <C-F>p <Plug>CtrlSFCCwordPath
-
 nnoremap <silent> <C-w>- :exe "resize " . (winheight(0) * 3/4)<CR>
 nnoremap <silent> <C-w>+ :exe "resize " . (winheight(0) * 10/9)<CR>
+
+hi DiagnosticError ctermfg=Red
