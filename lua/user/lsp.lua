@@ -82,11 +82,6 @@ end
 
 local lspconfig = require('lspconfig')
 
-lspconfig.dagger.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
 
 lspconfig.jsonls.setup {
   capabilities = capabilities,
@@ -109,7 +104,7 @@ lspconfig.pyright.setup {
   on_attach = on_attach,
 }
 
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
@@ -182,8 +177,9 @@ function organizeImports(timeoutms)
   for _, res in pairs(result or {}) do
     for _, r in pairs(res.result or {}) do
       if r.edit then
-        vim.lsp.util.apply_workspace_edit(r.edit, 'UTF-8')
-      else
+        local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+        vim.lsp.util.apply_workspace_edit(r.edit, enc)
+      elseif r.command and r.command.command then
         vim.lsp.buf.execute_command(r.command)
       end
     end

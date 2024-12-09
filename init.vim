@@ -323,6 +323,7 @@ let g:terraform_fmt_on_save=0
 
 " Disable quote concealing in JSON files
 let g:vim_json_conceal=0
+let g:vim_json_syntax_conceal = 0
 
 "Init lua
 lua require('user.init')

@@ -1,4 +1,6 @@
 require 'nvim-treesitter.configs'.setup {
+
+  auto_install = true,
   -- A list of parser names, or "all"
   ensure_installed = {
     "bash",
@@ -52,18 +54,37 @@ require 'nvim-treesitter.configs'.setup {
 
 -- disables json conceal in treesitter
 vim.treesitter.query.set("json", "highlights", [[
-(true) @boolean
-(false) @boolean
+[
+  (true)
+  (false)
+] @boolean
+
 (null) @constant.builtin
+
 (number) @number
-(pair key: (string) @label)
-(pair value: (string) @string)
-(array (string) @string)
-(string_content (escape_sequence) @string.escape)
-(ERROR) @error
-"," @punctuation.delimiter
-"[" @punctuation.bracket
-"]" @punctuation.bracket
-"{" @punctuation.bracket
-"}" @punctuation.bracket
+
+(pair
+  key: (string) @property)
+
+(pair
+  value: (string) @string)
+
+(array
+  (string) @string)
+
+[
+  ","
+  ":"
+] @punctuation.delimiter
+
+[
+  "["
+  "]"
+  "{"
+  "}"
+] @punctuation.bracket
+
+
+(escape_sequence) @string.escape
+
 ]])
