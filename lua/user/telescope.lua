@@ -1,28 +1,33 @@
 local opts = { noremap = true, silent = true }
 local builtin = require('telescope.builtin')
+
+local ivy = require("telescope.themes").get_ivy({ layout_config = { height = 15 } })
+
+
+
 vim.keymap.set("n", "<C-p>", function()
-  builtin.find_files({
-    find_command = { "rg", "--hidden", "--files", "--smart-case", "--glob=!.git" },
-  })
+  local opts = ivy
+  opts.find_command = { "rg", "--hidden", "--files", "--smart-case", "--glob=!.git" },
+      builtin.find_files(opts)
 end, opts)
-vim.keymap.set('n', '<C-F>f', builtin.live_grep, {})
-vim.keymap.set('n', '<C-F>b', builtin.buffers, {})
+
+vim.keymap.set('n', '<C-F>f', function() builtin.live_grep(ivy) end, opts)
+vim.keymap.set('n', '<C-F>b', function() builtin.buffers(ivy) end, opts)
+vim.keymap.set('n', '<C-F>r', function() builtin.resume(ivy) end, opts)
+vim.keymap.set('n', '<C-F>c', function() builtin.current_buffer_fuzzy_find(ivy) end, opts)
+vim.keymap.set('n', '<C-F>d', function() builtin.diagnostics(ivy) end, opts)
+vim.keymap.set("n", "<C-F>s", require("user.telescope-multi"), opts)
 --vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 --
 require('telescope').setup({
   defaults = {
-    layout_strategy = "vertical",
-    layout_config = {
-      vertical = {
-        preview_height = 0.3,
-        width = 0.8,
-        height = 0.8
-      }
-
-      -- other layout configuration here
+    pickers = {
+      find_files = {
+        theme = "ivy",
+      },
     },
-    -- other defaults configuration here
   },
+  -- other defaults configuration here
   vimgrep_arguments = {
     "rg",
     "--color=never",

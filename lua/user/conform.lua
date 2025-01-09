@@ -6,6 +6,7 @@ conform.setup({
     html = { "prettier", "injected" },
     javascript = { "prettier" },
     typescript = { "prettier" },
+    typescriptreact = { { 'prettierd', "prettier" } },
     json = { "jq" },
     lua = { "stylua" },
     markdown = { "prettier", "injected" },

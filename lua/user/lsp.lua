@@ -1,7 +1,14 @@
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local illuminate = require('illuminate')
+
+local capabilities = require("blink.cmp").get_lsp_capabilities({
+  workspace = {
+    didChangeWatchedFiles = {
+      dynamicRegistration = true, -- needs fswatch on linux
+      relativePatternSupport = true,
+    },
+  },
+}, true)
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)

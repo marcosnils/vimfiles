@@ -61,24 +61,6 @@
 [submodule "pack/plugins/start/nvm-lspconfig"]
 	path = pack/plugins/start/nvm-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
-[submodule "pack/plugins/start/nvim-cmp"]
-	path = pack/plugins/start/nvim-cmp
-	url = https://github.com/hrsh7th/nvim-cmp
-[submodule "pack/plugins/start/cmp-buffer"]
-	path = pack/plugins/start/cmp-buffer
-	url = https://github.com/hrsh7th/cmp-buffer
-[submodule "pack/plugins/start/cmp-path"]
-	path = pack/plugins/start/cmp-path
-	url = https://github.com/hrsh7th/cmp-path
-[submodule "pack/plugins/start/cmp-cmdline"]
-	path = pack/plugins/start/cmp-cmdline
-	url = https://github.com/hrsh7th/cmp-cmdline
-[submodule "pack/plugins/start/LuaSnip"]
-	path = pack/plugins/start/LuaSnip
-	url = https://github.com/L3MON4D3/LuaSnip
-[submodule "pack/plugins/start/cmp-nvim-lsp"]
-	path = pack/plugins/start/cmp-nvim-lsp
-	url = https://github.com/hrsh7th/cmp-nvim-lsp
 [submodule "pack/plugins/start/lualine"]
 	path = pack/plugins/start/lualine
 	url = https://github.com/nvim-lualine/lualine.nvim
@@ -91,9 +73,6 @@
 [submodule "pack/plugins/start/friendly_snippets"]
 	path = pack/plugins/start/friendly_snippets
 	url = https://github.com/rafamadriz/friendly-snippets
-[submodule "pack/plugins/start/cmp_luasnip"]
-	path = pack/plugins/start/cmp_luasnip
-	url = https://github.com/saadparwaiz1/cmp_luasnip
 [submodule "pack/plugins/start/nvim-treesitter"]
 	path = pack/plugins/start/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter
@@ -109,9 +88,6 @@
 [submodule "pack/plugins/start/nvim-ts-autotag"]
 	path = pack/plugins/start/nvim-ts-autotag
 	url = https://github.com/windwp/nvim-ts-autotag
-[submodule "pack/plugins/start/cmp-nvim-lsp-signature-help"]
-	path = pack/plugins/start/cmp-nvim-lsp-signature-help
-	url = git@github.com:hrsh7th/cmp-nvim-lsp-signature-help.git
 [submodule "pack/plugins/start/nvim-base16"]
 	path = pack/plugins/start/nvim-base16
 	url = git@github.com:RRethy/nvim-base16.git
@@ -139,3 +115,21 @@
 [submodule "pack/plugins/start/gitsigns"]
 	path = pack/plugins/start/gitsigns
 	url = https://github.com/lewis6991/gitsigns.nvim.git
+[submodule "pack/plugins/start/avante"]
+	path = pack/plugins/start/avante
+	url = https://github.com/yetone/avante.nvim
+[submodule "pack/plugins/start/dressing"]
+	path = pack/plugins/start/dressing
+	url = https://github.com/stevearc/dressing.nvim
+[submodule "pack/plugins/start/nui"]
+	path = pack/plugins/start/nui
+	url = https://github.com/MunifTanjim/nui.nvim
+[submodule "pack/plugins/start/blink-cmp"]
+	path = pack/plugins/start/blink-cmp
+	url = https://github.com/Saghen/blink.cmp
+[submodule "pack/plugins/start/blink.cmp"]
+	path = pack/plugins/start/blink.cmp
+	url = https://github.com/Saghen/blink.cmp
+[submodule "pack/plugins/start/blink.cmp@v0.10.0"]
+	path = pack/plugins/start/blink.cmp@v0.10.0
+	url = https://github.com/Saghen/blink.cmp
