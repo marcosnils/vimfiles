@@ -4,7 +4,7 @@ require("blink.cmp").setup({
 
     ['<Up>'] = { 'select_prev', 'fallback' },
     ['<Down>'] = { 'select_next', 'fallback' },
-    ['<Enter>'] = { 'select_and_accept', 'fallback' },
+    ['<Enter>'] = { 'accept', 'fallback' },
   },
   appearance = {
     use_nvim_cmp_as_default = true,
@@ -13,39 +13,16 @@ require("blink.cmp").setup({
   signature = { enabled = true },
   sources = {
     default = { "lsp", "path", "snippets", "buffer" },
-    cmdline = function()
-      local type = vim.fn.getcmdtype()
-      if type == "/" or type == "?" then
-        return { "buffer" }
-      end
-      if type == ":" then
-        return { "cmdline" }
-      end
-      return {}
-    end,
-    providers = {
-      lsp = {
-        min_keyword_length = 2,
-        score_offset = 0,
-      },
-      path = {
-        min_keyword_length = 0,
-      },
-      snippets = {
-        min_keyword_length = 2,
-      },
-      buffer = {
-        min_keyword_length = 5,
-        max_items = 5,
-      },
-    },
+    -- Disable cmdline completions
+    cmdline = {},
   },
   completion = {
     accept = { auto_brackets = { enabled = true } },
+    list = { selection = { preselect = false, auto_insert = true } },
     documentation = {
       auto_show = true,
       auto_show_delay_ms = 250,
-      treesitter_highlighting = true,
+      --treesitter_highlighting = true,
     },
   },
 })
