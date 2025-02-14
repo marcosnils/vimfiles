@@ -1,4 +1,3 @@
-
 local illuminate = require('illuminate')
 
 local capabilities = require("blink.cmp").get_lsp_capabilities({
@@ -27,33 +26,24 @@ local on_attach = function(client, bufnr)
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
 
-  -- Mappings.
-  local opts = { noremap = true, silent = true, buffer = bufnr }
 
-  local builtin = require("telescope.builtin")
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', builtin.lsp_definitions, bufopts)
   vim.keymap.set('n', '<leader>dv', function()
     vim.cmd('vsplit')
     vim.lsp.buf.definition()
   end, bufopts)
-  vim.keymap.set('n', "<leader>ls", builtin.lsp_document_symbols, bufopts)
-  vim.keymap.set('n', "<leader>lS", builtin.lsp_dynamic_workspace_symbols, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', builtin.lsp_implementations, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
-  vim.keymap.set('n', '<space>D', builtin.lsp_type_definitions, bufopts)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', builtin.lsp_references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
   vim.keymap.set('n', '<A-n>', function() require "illuminate".next_reference { wrap = true } end, bufopts)
   vim.keymap.set('n', '<A-p>', function() require "illuminate".next_reference { wrap = true, reverse = true } end,
@@ -105,6 +95,7 @@ lspconfig.golangci_lint_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
+
 
 lspconfig.pyright.setup {
   capabilities = capabilities,

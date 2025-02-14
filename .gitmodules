@@ -127,9 +127,6 @@
 [submodule "pack/plugins/start/blink-cmp"]
 	path = pack/plugins/start/blink-cmp
 	url = https://github.com/Saghen/blink.cmp
-[submodule "pack/plugins/start/blink.cmp"]
-	path = pack/plugins/start/blink.cmp
-	url = https://github.com/Saghen/blink.cmp
 [submodule "pack/plugins/start/blink.cmp@v0.10.0"]
 	path = pack/plugins/start/blink.cmp@v0.10.0
 	url = https://github.com/Saghen/blink.cmp
