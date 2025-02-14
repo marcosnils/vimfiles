@@ -1,8 +1,6 @@
 require("blink.cmp").setup({
   keymap = {
     preset = "default",
-    ['<Up>'] = { 'select_prev', 'fallback' },
-    ['<Down>'] = { 'select_next', 'fallback' },
     ['<Enter>'] = { 'accept', 'fallback' },
   },
   appearance = {
@@ -21,7 +19,7 @@ require("blink.cmp").setup({
     documentation = {
       auto_show = true,
       auto_show_delay_ms = 250,
-      --treesitter_highlighting = true,
+      treesitter_highlighting = true,
     },
   },
 })

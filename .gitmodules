@@ -130,3 +130,6 @@
 [submodule "pack/plugins/start/blink.cmp@v0.10.0"]
 	path = pack/plugins/start/blink.cmp@v0.10.0
 	url = https://github.com/Saghen/blink.cmp
+[submodule "pack/plugins/start/nvim-web-devicons"]
+	path = pack/plugins/start/nvim-web-devicons
+	url = https://github.com/nvim-tree/nvim-web-devicons
