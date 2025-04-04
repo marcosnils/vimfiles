@@ -7,6 +7,7 @@ require('user.conform')
 require('user.undotree')
 require('user.telescope')
 require("gitsigns").setup()
+require("user.avante")
 
 
 require("ibl").setup()

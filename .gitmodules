@@ -133,3 +133,9 @@
 [submodule "pack/plugins/start/nvim-web-devicons"]
 	path = pack/plugins/start/nvim-web-devicons
 	url = https://github.com/nvim-tree/nvim-web-devicons
+[submodule "pack/plugins/start/nui.nvim"]
+	path = pack/plugins/start/nui.nvim
+	url = https://github.com/MunifTanjim/nui.nvim
+[submodule "pack/plugins/start/img-clip"]
+	path = pack/plugins/start/img-clip
+	url = git@github.com:HakonHarnes/img-clip.nvim.git

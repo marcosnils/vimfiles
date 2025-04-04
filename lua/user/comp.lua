@@ -2,6 +2,7 @@ require("blink.cmp").setup({
   keymap = {
     preset = "default",
     ['<Enter>'] = { 'accept', 'fallback' },
+    ['<C-space>'] = { "show", "show_documentation", "hide_documentation" },
   },
   appearance = {
     use_nvim_cmp_as_default = true,
@@ -11,7 +12,6 @@ require("blink.cmp").setup({
   sources = {
     default = { "lsp", "path", "snippets", "buffer" },
     -- Disable cmdline completions
-    cmdline = {},
   },
   completion = {
     accept = { auto_brackets = { enabled = true } },

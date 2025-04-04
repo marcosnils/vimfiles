@@ -341,3 +341,4 @@ nnoremap <silent> <C-w>- :exe "resize " . (winheight(0) * 3/4)<CR>
 nnoremap <silent> <C-w>+ :exe "resize " . (winheight(0) * 10/9)<CR>
 
 hi DiagnosticError ctermfg=Red
+hi Visual cterm=reverse gui=reverse
