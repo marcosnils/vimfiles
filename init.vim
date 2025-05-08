@@ -52,7 +52,8 @@ set gdefault
 set vb
 
 "" Set GUI Options and scrollbars
-set guioptions=egmrLtTb
+" commented when upgrading to neovim 0.11
+"set guioptions=egmrLtTb
 
 "" Remove the 'tear bla bla from menus'
 set guioptions-=t
