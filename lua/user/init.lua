@@ -6,9 +6,18 @@ require('user.treesitter')
 require('user.conform')
 require('user.undotree')
 require('user.telescope')
-require("gitsigns").setup()
 require("user.avante")
 
+
+require("gitsigns").setup()
+
+vim.keymap.set("n", "<leader>gd", function()
+  vim.cmd.Gitsigns("preview_hunk")
+end, {
+  noremap = true,
+  silent = true,
+  desc = "Git preview hunk",
+})
 
 require("ibl").setup()
 
@@ -52,7 +61,8 @@ require('lualine').setup {
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = { "gopls@v0.14.2", "golangci_lint_ls" }
+  ensure_installed = { "gopls@v0.14.2", "golangci_lint_ls" },
+  automatic_enable = false
 })
 
 require "gitlinker".setup()
@@ -71,3 +81,10 @@ vim.keymap.set(
   end,
   { silent = true, noremap = true, desc = "GitLink!" }
 )
+
+vim.keymap.set("n", "<C-x>", ":bdelete<cr>", {
+  noremap = true,
+  silent = true,
+  --buffer = vim.api.nvim_get_current_buf(),
+  desc = "Close buffer",
+})

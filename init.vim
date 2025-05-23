@@ -244,9 +244,6 @@ imap <F5> <C-O>:set nowrap!<CR>
 map <silent> <F6> :set nolist!<CR>
 imap <silent> <F6> <C-O>:set nolist!<CR>
 
-"" Closes buffer
-nmap <C-x> :bdelete<CR>
-
 "" Remaps Shift + v to select line without newline char in visual mode
 nnoremap <leader>v 0vg_
 

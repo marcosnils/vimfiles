@@ -55,7 +55,7 @@ local on_attach = function(client, bufnr)
       pattern = "*.go",
       group = vim.api.nvim_create_augroup("LspGolangOrganizeImports." .. bufnr, {}),
       callback = function()
-        organizeImports(500)
+        organizeImports(500, client)
       end,
     })
   end
@@ -168,8 +168,9 @@ lspconfig.yamlls.setup {
 --
 -- organize imports
 -- https://github.com/neovim/nvim-lspconfig/issues/115#issuecomment-902680058
-function organizeImports(timeoutms)
-  local params = vim.lsp.util.make_range_params()
+function organizeImports(timeoutms, client)
+  local win = vim.api.nvim_get_current_win()
+  local params = vim.lsp.util.make_range_params(win, client.offset_encoding or "utf-16")
   params.context = { only = { "source.organizeImports" } }
   local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeoutms)
   for _, res in pairs(result or {}) do
@@ -183,3 +184,22 @@ function organizeImports(timeoutms)
     end
   end
 end
+
+local float_config = {
+  focusable = true,
+  style = "minimal",
+  source = "if_many",
+  border = "single",
+}
+
+-- setup diagnostics
+vim.diagnostic.config({
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = float_config,
+})
+
+vim.lsp.buf.hover(float_config)
+vim.lsp.buf.signature_help(float_config)
+vim.highlight.priorities.semantic_tokens = 95

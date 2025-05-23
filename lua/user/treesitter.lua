@@ -88,3 +88,7 @@ vim.treesitter.query.set("json", "highlights", [[
 (escape_sequence) @string.escape
 
 ]])
+
+require 'treesitter-context'.setup {
+  multiline_threshold = 1,
+}

@@ -139,3 +139,6 @@
 [submodule "pack/plugins/start/img-clip"]
 	path = pack/plugins/start/img-clip
 	url = git@github.com:HakonHarnes/img-clip.nvim.git
+[submodule "pack/plugins/start/nvim-treesitter-context"]
+	path = pack/plugins/start/nvim-treesitter-context
+	url = https://github.com/nvim-treesitter/nvim-treesitter-context.git
