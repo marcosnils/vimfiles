@@ -28,9 +28,6 @@
 [submodule "bundle/taglist-plus"]
 	path = bundle/taglist-plus
 	url = https://github.com/int3/vim-taglist-plus.git
-[submodule "bundle/vim-less"]
-	path = pack/plugins/start/vim-less
-	url = https://github.com/groenewege/vim-less.git
 [submodule "bundle/vim-snipmate"]
 	path = bundle/vim-snipmate
 	url = https://github.com/garbas/vim-snipmate.git
