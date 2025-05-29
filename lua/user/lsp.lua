@@ -1,4 +1,5 @@
 local illuminate = require('illuminate')
+local ms = require("vim.lsp.protocol").Methods
 
 local capabilities = require("blink.cmp").get_lsp_capabilities({
   workspace = {
@@ -48,32 +49,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<A-n>', function() require "illuminate".next_reference { wrap = true } end, bufopts)
   vim.keymap.set('n', '<A-p>', function() require "illuminate".next_reference { wrap = true, reverse = true } end,
     bufopts)
-
-
-  if client.server_capabilities.codeActionProvider and client.name ~= "lua_ls" then
-    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-      pattern = "*.go",
-      group = vim.api.nvim_create_augroup("LspGolangOrganizeImports." .. bufnr, {}),
-      callback = function()
-        organizeImports(500, client)
-      end,
-    })
-  end
-
-
-  -- Set autocommands conditional on server_capabilities
-  if client.server_capabilities.documentHighlightProvider then
-    vim.cmd([[
-      hi def link LspReferenceRead CursorLine
-      hi def link LspReferenceText CursorLine
-      hi def link LspReferenceWrite CursorLine
-			augroup lsp_document_highlight
-				autocmd! * <buffer>
-				autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-				autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-			augroup END
-		]])
-  end
 end
 
 
@@ -164,26 +139,6 @@ lspconfig.yamlls.setup {
   },
 }
 
---vim.lsp.set_log_level("debug")
---
--- organize imports
--- https://github.com/neovim/nvim-lspconfig/issues/115#issuecomment-902680058
-function organizeImports(timeoutms, client)
-  local win = vim.api.nvim_get_current_win()
-  local params = vim.lsp.util.make_range_params(win, client.offset_encoding or "utf-16")
-  params.context = { only = { "source.organizeImports" } }
-  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeoutms)
-  for _, res in pairs(result or {}) do
-    for _, r in pairs(res.result or {}) do
-      if r.edit then
-        local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
-        vim.lsp.util.apply_workspace_edit(r.edit, enc)
-      elseif r.command and r.command.command then
-        vim.lsp.buf.execute_command(r.command)
-      end
-    end
-  end
-end
 
 local float_config = {
   focusable = true,
@@ -203,3 +158,103 @@ vim.diagnostic.config({
 vim.lsp.buf.hover(float_config)
 vim.lsp.buf.signature_help(float_config)
 vim.highlight.priorities.semantic_tokens = 95
+
+-- Checks if the given buffer has any lsp clients that support the given method.
+--
+---@param bufnr number Buffer number
+---@param method string Method name
+---@return boolean
+local has_clients_with_method = function(bufnr, method)
+  local clients = vim.lsp.get_clients({ bufnr = bufnr, method = method })
+  return #clients > 0
+end
+
+-- Format code and organize imports (if supported) (async).
+--
+---@async
+---@param client vim.lsp.Client
+---@param bufnr number
+---@type fun(client: vim.lsp.Client, bufnr: number)
+local organize_imports = function(client, bufnr)
+  ---@type lsp.Handler
+  ---@diagnostic disable-next-line: unused-local
+  local handler = function(err, result, context, config)
+    if err then
+      -- ignore errors
+      return
+    end
+    for _, r in pairs(result or {}) do
+      if r.edit then
+        local enc = client.offset_encoding or "utf-16"
+        vim.lsp.util.apply_workspace_edit(r.edit, enc)
+      elseif r.command and r.command.command then
+        client:exec_cmd(r.command, { bufnr = bufnr })
+      end
+    end
+    vim.cmd([[noautocmd write]])
+  end
+
+  local win = vim.api.nvim_get_current_win()
+  local params = vim.lsp.util.make_range_params(win, client.offset_encoding or "utf-16")
+  params.context = { only = { "source.organizeImports" } }
+  client:request(ms.textDocument_codeAction, params, handler, bufnr)
+end
+
+
+---@param bufnr number
+---@param method string
+---@param apply fun(client: vim.lsp.Client, bufnr: number)
+---@param filter? fun(client: vim.lsp.Client): boolean?
+local on_clients = function(bufnr, method, apply, filter)
+  local clients = vim.lsp.get_clients({ bufnr = bufnr, method = method })
+  if not filter then
+    filter = function()
+      return true
+    end
+  end
+  for _, client in ipairs(clients) do
+    if filter(client) then
+      apply(client, bufnr)
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    ---@type fun(client: vim.lsp.Client): boolean?
+    local filter = function(client)
+      -- lua_ls freaks out when you ask it to organize imports.
+      return client.name ~= "lua_ls"
+    end
+    on_clients(bufnr, ms.textDocument_codeAction, organize_imports, filter)
+  end,
+  group = group,
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+  callback = function()
+    if has_clients_with_method(0, ms.textDocument_codeLens) then
+      vim.lsp.codelens.refresh({ bufnr = 0 })
+    end
+  end,
+  group = group,
+})
+
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+  callback = function()
+    if has_clients_with_method(0, ms.textDocument_documentHighlight) then
+      vim.lsp.buf.document_highlight()
+    end
+  end,
+  group = group,
+})
+
+vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+  callback = function()
+    if has_clients_with_method(0, ms.textDocument_documentHighlight) then
+      vim.lsp.buf.clear_references()
+    end
+  end,
+  group = group,
+})
