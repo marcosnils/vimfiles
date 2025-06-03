@@ -10,6 +10,13 @@ require("user.avante")
 
 
 require("gitsigns").setup()
+require("oil").setup({
+  view_options = {
+    -- Show files and directories that start with "."
+    show_hidden = true
+  }
+})
+vim.keymap.set({ "n", "v", "i" }, "<F1>", "<CMD>Oil --float<CR>")
 
 vim.keymap.set("n", "<leader>gd", function()
   vim.cmd.Gitsigns("preview_hunk")

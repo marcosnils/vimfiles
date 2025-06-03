@@ -13,9 +13,6 @@
 [submodule "bundle/vim-abolish"]
 	path = pack/plugins/start/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
-[submodule "bundle/nerdtree"]
-	path = pack/plugins/start/nerdtree
-	url = http://github.com/scrooloose/nerdtree.git
 [submodule "bundle/nerdcommenter"]
 	path = pack/plugins/start/nerdcommenter
 	url = http://github.com/scrooloose/nerdcommenter.git
@@ -136,3 +133,6 @@
 [submodule "pack/plugins/start/nvim-treesitter-context"]
 	path = pack/plugins/start/nvim-treesitter-context
 	url = https://github.com/nvim-treesitter/nvim-treesitter-context.git
+[submodule "pack/plugins/start/oil.nvim"]
+	path = pack/plugins/start/oil.nvim
+	url = https://github.com/stevearc/oil.nvim.git

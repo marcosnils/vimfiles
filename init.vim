@@ -179,29 +179,6 @@ augroup END
 set updatetime=500
 
 
-"""""""""""""""""""""""""""""""""""""""
-"""""""""" Plugin Parameters """"""""""
-"""""""""""""""""""""""""""""""""""""""
-
-"" NERDTree Parameters
-"" Quit on opening files from the tree
-let NERDTreeQuitOnOpen=0
-
-" Highlight the selected entry in the tree
-let NERDTreeHighlightCursorline=1
-
-"" Open NERDTree in same dir
-let NERDTreeChDirMode=1
-
-"" Show hidden files by default
-let NERDTreeShowHidden=1
-
-"Command-T configuration
-let g:CommandTMaxHeight=10
-let g:CommandTMatchWindowAtTop=1
-
-
-
 """"""""""""""""""""""""""""""""""""""
 """""""""""" Key Mappings """"""""""""
 """"""""""""""""""""""""""""""""""""""
@@ -225,10 +202,6 @@ nnoremap <leader><tab> <C-W>w
 
 "" Cycles between buffers
 map <silent> <C-i> :buffer #<CR>
-
-"" Toggles NERDTree
-imap <silent> <F1> <esc>:NERDTreeFind<CR>
-nmap <silent> <F1> :NERDTreeFind<CR>
 
 "" List/Next/Previous buffers
 map <silent> <F3> <esc>:bp<CR>
