@@ -17,99 +17,53 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+vim.api.nvim_create_autocmd('LspAttach', {
+  desc = 'LSP actions',
+  callback = function(event)
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local bufopts = { buffer = event.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', '<leader>dv', function()
+      vim.cmd('vsplit')
+      vim.lsp.buf.definition()
+    end, bufopts)
+    vim.keymap.set('n', '<leader>dh', function()
+      vim.cmd('split')
+      vim.lsp.buf.definition()
+    end, bufopts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  end,
+})
 
-  illuminate.on_attach(client, bufnr)
+require('illuminate').configure({})
 
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-
-
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', '<leader>dv', function()
-    vim.cmd('vsplit')
-    vim.lsp.buf.definition()
-  end, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-  vim.keymap.set('n', '<A-n>', function() require "illuminate".next_reference { wrap = true } end, bufopts)
-  vim.keymap.set('n', '<A-p>', function() require "illuminate".next_reference { wrap = true, reverse = true } end,
-    bufopts)
-end
 
 
 local lspconfig = require('lspconfig')
 
+lspconfig.jsonls.setup({})
+lspconfig.graphql.setup({})
+lspconfig.golangci_lint_ls.setup({})
+lspconfig.pyright.setup({})
+lspconfig.ts_ls.setup({})
+lspconfig.eslint.setup({})
+lspconfig.rust_analyzer.setup({})
+lspconfig.lua_ls.setup({})
 
-lspconfig.jsonls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-
-lspconfig.graphql.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-lspconfig.golangci_lint_ls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-
-lspconfig.pyright.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-lspconfig.ts_ls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-
-lspconfig.phpactor.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-
-lspconfig.eslint.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-lspconfig.rust_analyzer.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-
-lspconfig.lua_ls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-
-lspconfig.gopls.setup {
+lspconfig.gopls.setup({
   cmd = { 'gopls' },
   -- for postfix snippets and analyzers
-  capabilities = capabilities,
   settings = {
     gopls = {
       experimentalPostfixCompletions = true,
@@ -121,12 +75,9 @@ lspconfig.gopls.setup {
       staticcheck = true,
     },
   },
-  on_attach = on_attach,
-}
+})
 
-lspconfig.yamlls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
+lspconfig.yamlls.setup({
   settings = {
     yaml = {
       keyOrdering = false,
@@ -137,7 +88,8 @@ lspconfig.yamlls.setup {
       schemas = schemas,
     },
   },
-}
+})
+
 
 
 local float_config = {
