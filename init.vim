@@ -313,3 +313,6 @@ nnoremap <silent> <C-w>+ :exe "resize " . (winheight(0) * 10/9)<CR>
 
 hi DiagnosticError ctermfg=Red
 hi Visual cterm=reverse gui=reverse
+
+hi TreesitterContextBottom gui=underline guisp=Grey
+hi TreesitterContextLineNumberBottom gui=underline guisp=Grey

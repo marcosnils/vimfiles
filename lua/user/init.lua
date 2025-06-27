@@ -16,7 +16,7 @@ require("oil").setup({
     show_hidden = true
   }
 })
-vim.keymap.set({ "n", "v", "i" }, "<F1>", "<CMD>Oil --float<CR>")
+vim.keymap.set({ "n", "v", "i" }, "<F1>", require("oil").toggle_float)
 
 vim.keymap.set("n", "<leader>gd", function()
   vim.cmd.Gitsigns("preview_hunk")
@@ -89,7 +89,7 @@ vim.keymap.set(
   { silent = true, noremap = true, desc = "GitLink!" }
 )
 
-vim.keymap.set("n", "<C-x>", ":bdelete<cr>", {
+vim.keymap.set("n", "<C-x>", ":b #|bd #<cr>", {
   noremap = true,
   silent = true,
   --buffer = vim.api.nvim_get_current_buf(),

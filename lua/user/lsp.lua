@@ -16,6 +16,21 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
+local float_config = {
+  focusable = true,
+  style = "minimal",
+  source = "if_many",
+  border = "single",
+}
+
+-- setup diagnostics
+vim.diagnostic.config({
+  --underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = float_config,
+})
+
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
@@ -33,8 +48,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.cmd('split')
       vim.lsp.buf.definition()
     end, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover(float_config) end, bufopts)
+    vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help(float_config) end, bufopts)
     vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
     vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
     vim.keymap.set('n', '<space>wl', function()
@@ -47,8 +62,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 require('illuminate').configure({})
-
-
 
 local lspconfig = require('lspconfig')
 
@@ -73,6 +86,7 @@ lspconfig.gopls.setup({
         shadow = true,
       },
       staticcheck = true,
+      semanticTokens = true,
     },
   },
 })
@@ -91,24 +105,6 @@ lspconfig.yamlls.setup({
 })
 
 
-
-local float_config = {
-  focusable = true,
-  style = "minimal",
-  source = "if_many",
-  border = "single",
-}
-
--- setup diagnostics
-vim.diagnostic.config({
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
-  float = float_config,
-})
-
-vim.lsp.buf.hover(float_config)
-vim.lsp.buf.signature_help(float_config)
 vim.highlight.priorities.semantic_tokens = 95
 
 -- Checks if the given buffer has any lsp clients that support the given method.
