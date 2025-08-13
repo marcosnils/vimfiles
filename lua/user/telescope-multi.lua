@@ -8,16 +8,16 @@ local sorters = require("telescope.sorters")
 local themes = require("telescope.themes")
 local flatten = vim.fn.flattennew
 return function(opts)
-  opts = opts or {layout_config = {height = 15}}
+  opts = opts or { layout_config = { height = 15 } }
   opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
   opts.shortcuts = opts.shortcuts
       or {
-      ["n"] = "*.{vim,lua}",
-      ["g"] = "*.go",
-      ["y"] = "*.ya?ml",
+        ["n"] = "*.{vim,lua}",
+        ["g"] = "*.go",
+        ["y"] = "*.ya?ml",
       }
   opts.pattern = opts.pattern or "%s"
-  opts = themes.get_ivy(opts)
+  opts = themes.get_dropdown(opts)
   local custom_grep = finders.new_async_job({
     command_generator = function(prompt)
       if not prompt or prompt == "" then

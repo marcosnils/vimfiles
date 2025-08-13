@@ -31,7 +31,6 @@ vim.diagnostic.config({
   float = float_config,
 })
 
-
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)

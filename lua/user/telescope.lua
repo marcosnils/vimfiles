@@ -1,9 +1,7 @@
 local opts = { noremap = true, silent = true }
 local builtin = require('telescope.builtin')
 
-local theme = require("telescope.themes").get_dropdown({})
-
-
+local theme = require("telescope.themes").get_dropdown()
 
 vim.keymap.set("n", "<C-p>", function()
   local opts = theme
@@ -29,7 +27,7 @@ require('telescope').setup({
   defaults = {
     pickers = {
       find_files = {
-        theme = "ivy",
+        theme = "dropdown",
       },
     },
   },
