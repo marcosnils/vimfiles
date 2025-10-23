@@ -91,7 +91,7 @@ vim.keymap.set(
   { silent = true, noremap = true, desc = "GitLink!" }
 )
 
-vim.keymap.set("n", "<C-x>", ":bd <cr>", {
+vim.keymap.set("n", "<C-x>", ":b#|bd# <cr>", {
   noremap = true,
   silent = true,
   --buffer = vim.api.nvim_get_current_buf(),

@@ -60,6 +60,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+vim.api.nvim_create_autocmd("LspDetach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    if client:supports_method(ms.textDocument_codeLens, vim.api.nvim_get_current_buf()) then
+      vim.lsp.codelens.clear(client.id)
+    end
+  end,
+  group = group,
+})
+
 require('illuminate').configure({})
 
 local lspconfig = require('lspconfig')
@@ -178,6 +191,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   end,
   group = group,
 })
+
 
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
   callback = function()

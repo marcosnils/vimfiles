@@ -9,12 +9,12 @@ vim.keymap.set("n", "<C-p>", function()
 end, opts)
 
 local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<C-F>s", require("user.telescope-multi"), opts)
 vim.keymap.set('n', '<C-F>f', function() builtin.live_grep(theme) end, opts)
 vim.keymap.set('n', '<C-F>b', function() builtin.buffers(theme) end, opts)
 vim.keymap.set('n', '<C-F>r', function() builtin.resume(theme) end, opts)
 vim.keymap.set('n', '<C-F>c', function() builtin.current_buffer_fuzzy_find(theme) end, opts)
 vim.keymap.set('n', '<C-F>d', function() builtin.diagnostics(theme) end, opts)
-vim.keymap.set("n", "<C-F>s", require("user.telescope-multi"), opts)
 vim.keymap.set('n', '<C-F>h', function() builtin.help_tags(theme) end, opts)
 vim.keymap.set('n', 'gr', function() builtin.lsp_references(theme) end, opts)
 vim.keymap.set('n', 'gk', function() builtin.keymaps(theme) end, opts)

@@ -316,3 +316,7 @@ hi Visual cterm=reverse gui=reverse
 
 hi TreesitterContextBottom gui=underline guisp=Grey
 hi TreesitterContextLineNumberBottom gui=underline guisp=Grey
+
+" don't wrap while searching
+set nowrapscan
+
